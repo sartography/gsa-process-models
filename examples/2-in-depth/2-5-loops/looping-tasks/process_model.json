@@ -1,0 +1,9 @@
+{
+    "description": "An example of a task that repeats a certain number of times.",
+    "display_name": "Looping Tasks",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "looping-tasks.bpmn",
+    "primary_process_id": "Process_looping_tasks_ko1ubip"
+}

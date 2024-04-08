@@ -1,0 +1,15 @@
+{
+  "title": "Cheese",
+  "description": "We would like to know what your favorite cheese.",
+  "type": "object",
+  "required": [
+    "cheese"
+  ],
+  "properties": {
+    "cheese": {
+      "type": "string",
+      "title": "Cheese",
+      "default": "Cheddar"
+    }
+  }
+}

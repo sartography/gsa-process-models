@@ -1,0 +1,22 @@
+{
+  "favoriteFruit": "ertwertwertwret",
+  "multipleChoicesList": [
+    "bar",
+    "fuzz",
+    "qux"
+  ],
+  "fruits": [
+    {
+      "value": "apples",
+      "label": "Apples"
+    },
+    {
+      "value": "oranges",
+      "label": "Oranges"
+    },
+    {
+      "value": "bananas",
+      "label": "Bananas"
+    }
+  ]
+}

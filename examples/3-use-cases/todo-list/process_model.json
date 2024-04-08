@@ -1,0 +1,9 @@
+{
+    "description": "Example showing one way to implement a todo list where the items can be added and removed dynamically, as well as checked off",
+    "display_name": "Todo List",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "todolist.bpmn",
+    "primary_process_id": "todo_list_process"
+}

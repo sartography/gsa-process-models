@@ -1,0 +1,27 @@
+{
+  "title": "Main Course",
+  "description": "Please select your Main Course",
+  "properties": {
+    "chicken_cordon_bleu": {
+      "type": "boolean",
+      "title": "Chicken Cordon Bleu"
+    },
+    "vegetable_biryani": {
+      "type": "boolean",
+      "title": "Vegetable Biryani"
+    },
+    "scallops_with_basil_risotto": {
+      "type": "boolean",
+      "title": "Scallops with Basil Risotto"
+    },
+    "beef_lasagna": {
+      "type": "boolean",
+      "title": "Beef lasagna"
+    },
+    "turkey_enchilada": {
+      "type": "boolean",
+      "title": "Turkey enchilada"
+    }
+  },
+  "required": []
+}

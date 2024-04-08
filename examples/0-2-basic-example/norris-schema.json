@@ -1,0 +1,51 @@
+{
+  "required": [
+    "pushups",
+    "thanos",
+    "bulletproof"
+  ],
+  "properties": {
+    "pushups": {
+      "type": "boolean",
+      "title": "When the Great Chuck Norris does a pushup, he’s pushing the Earth down.",
+      "oneOf": [
+        {
+          "title": "True",
+          "const": true
+        },
+        {
+          "title": "False",
+          "const": false
+        }
+      ]
+    },
+    "thanos": {
+      "type": "boolean",
+      "title": "Chuck Norris was given a bloody nose by Thanos the god like villain from the Avengers Movies",
+      "oneOf": [
+        {
+          "title": "True",
+          "const": true
+        },
+        {
+          "title": "False",
+          "const": false
+        }
+      ]
+    },
+    "bulletproof": {
+      "type": "boolean",
+      "title": "A bulletproof vest wears Chuck Norris for protection.",
+      "oneOf": [
+        {
+          "title": "True",
+          "const": true
+        },
+        {
+          "title": "False",
+          "const": false
+        }
+      ]
+    }
+  }
+}

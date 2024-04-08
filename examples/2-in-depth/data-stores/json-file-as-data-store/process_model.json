@@ -1,0 +1,9 @@
+{
+    "description": "This is similar to the standard Json data store, but this data is saved in a file next to the BPMN - this can make it easy to share, track, and promote the data that is critical to a BPMN Process Model. ",
+    "display_name": "Json File as Data Store",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "json-file-as-data-store.bpmn",
+    "primary_process_id": "Process_json_file_as_data_store_95sczqr"
+}

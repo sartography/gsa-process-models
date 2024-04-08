@@ -1,0 +1,16 @@
+{
+  "title": "Payment Method",
+  "description": "Please select your preferred Payment method",
+  "properties": {
+    "pay_on_delivery": {
+      "type": "boolean",
+      "title": "Pay on Delivery",
+      "default": true
+    },
+    "pay_online": {
+      "type": "boolean",
+      "title": "Pay Online"
+    }
+  },
+  "required": []
+}

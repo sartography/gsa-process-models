@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="Definitions_76910d7" name="DRD" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="decision_1" name="pizza prices">
+    <decisionTable id="decisionTable_1">
+      <input id="input_1">
+        <inputExpression id="inputExpression_1" typeRef="string">
+          <text>size</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" name="cost" typeRef="number" />
+      <rule id="DecisionRule_1ga6v7x">
+        <inputEntry id="UnaryTests_1qrr89p">
+          <text>"small"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0awxfnq">
+          <text>11.00</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1amso5u">
+        <inputEntry id="UnaryTests_192fl97">
+          <text>"medium"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_117q4i7">
+          <text>15.00</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_15e5x0z">
+        <inputEntry id="UnaryTests_1i4uzvr">
+          <text>"large"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0fbbqzb">
+          <text>20.00</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_1cykosu">
+      <dmndi:DMNShape id="DMNShape_1dhfq2s" dmnElementRef="decision_1">
+        <dc:Bounds height="80" width="180" x="157" y="151" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

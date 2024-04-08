@@ -1,0 +1,9 @@
+{
+    "description": "Learn how to use escalation events when you need to react at a higher level.",
+    "display_name": "Escalation Events",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "escalation-events.bpmn",
+    "primary_process_id": "Process_escalation_events_iq40493"
+}

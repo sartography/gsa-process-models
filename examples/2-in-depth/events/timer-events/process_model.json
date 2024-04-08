@@ -1,0 +1,9 @@
+{
+    "description": "If you take to long to respond, this process will go in a different direction.",
+    "display_name": "Timer Events",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "timer-events.bpmn",
+    "primary_process_id": "Process_timer_events_oh3akqq"
+}

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_96f6665" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-dev">
+  <bpmn:process id="Process_ApiKeyCreateLoad" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0vdepw5</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0vdepw5" sourceRef="StartEvent_1" targetRef="load_contact_preferences" />
+    <bpmn:endEvent id="Event_1hcdpd6">
+      <bpmn:incoming>Flow_0qqvymg</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0qqvymg" sourceRef="load_contact_preferences" targetRef="Event_1hcdpd6" />
+    <bpmn:scriptTask id="load_contact_preferences" name="Load contact preferences">
+      <bpmn:incoming>Flow_0vdepw5</bpmn:incoming>
+      <bpmn:outgoing>Flow_0qqvymg</bpmn:outgoing>
+      <bpmn:script>from spiffworkflow_backend.models.service_account import ServiceAccountModel
+from flask import current_app
+
+current_user = get_current_user()
+api_key_model_objects = ServiceAccountModel.query.filter_by(created_by_user_id=current_user['id']).all()
+
+api_keys = []
+for akmo in api_key_model_objects:
+    created_at = None
+    if akmo.created_at_in_seconds is not None:
+        created_at = datetime.fromtimestamp(akmo.created_at_in_seconds).strftime('%Y-%m-%d')
+    api_keys.append({
+        "name": akmo.name,
+        "created_at": created_at
+    })
+
+del(datetime)
+del(api_key_model_objects)
+del(current_user)
+del(ServiceAccountModel)</bpmn:script>
+    </bpmn:scriptTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_ApiKeyCreateLoad">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1hcdpd6_di" bpmnElement="Event_1hcdpd6">
+        <dc:Bounds x="482" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0j6zsg7_di" bpmnElement="load_contact_preferences">
+        <dc:Bounds x="271" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0vdepw5_di" bpmnElement="Flow_0vdepw5">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="271" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qqvymg_di" bpmnElement="Flow_0qqvymg">
+        <di:waypoint x="371" y="177" />
+        <di:waypoint x="482" y="177" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

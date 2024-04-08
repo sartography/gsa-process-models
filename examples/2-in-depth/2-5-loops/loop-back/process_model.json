@@ -1,0 +1,9 @@
+{
+    "description": "This is an example of process model that loops back to previously completed activities.",
+    "display_name": "Loop back",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "loop-back.bpmn",
+    "primary_process_id": "Process_a6111aa"
+}

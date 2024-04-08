@@ -1,0 +1,37 @@
+{
+  "title": "Select a Pizza!",
+  "description": "",
+  "required": [
+    "size", "toppings"
+  ],
+  "properties": {
+    "size": {
+      "type": "string",
+      "title": "Size",
+      "enum": [
+        "Personal",
+        "Medium",
+        "Large"
+      ]
+    },
+    "toppings": {
+      "type": "array",
+      "title": "Toppings",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Pepperoni",
+          "Cucumber",
+          "Spam",
+          "Anchovies",
+          "Salsa",
+          "Squash",
+          "Peanuts",
+          "Octopus Tenticles",
+          "Chicken Feet"
+        ]
+      },
+      "uniqueItems": true
+    }
+  }
+}

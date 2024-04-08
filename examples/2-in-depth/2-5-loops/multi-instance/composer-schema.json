@@ -1,0 +1,18 @@
+{
+"type": "object",
+"properties": {
+    "c": {
+      "type": "object",
+      "properties": {
+        "composer": {
+        "type": "string",
+        "description": "Name of the Composer"
+        },
+        "genre": {
+        "type": "string",
+        "description": "Genre of the composer's music"
+        }
+      }
+    }
+  }
+}

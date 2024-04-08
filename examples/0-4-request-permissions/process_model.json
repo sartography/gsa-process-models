@@ -1,0 +1,11 @@
+{
+    "description": "Would you like to experiment a little and build your own diagrams?  Complete this workflow to request access to a private playground that you control.",
+    "display_name": "Request a Playground",
+    "exception_notification_addresses": [
+        "phillana@sartography.com"
+    ],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": [],
+    "primary_file_name": "signupCustomer.bpmn",
+    "primary_process_id": "Process_signupCustomer"
+}

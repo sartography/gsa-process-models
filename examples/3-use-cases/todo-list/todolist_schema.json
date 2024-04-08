@@ -1,0 +1,29 @@
+{
+  "title": "Todo List",
+  "description": "Please check off completed items and add additional items as necessary.",
+  "type": "object",
+  "properties": {
+    "todoList": {
+      "type": "array",
+      "title": "Todo List",
+      "items": {
+        "required": [
+          "todoTitle",
+          "isComplete"
+        ],
+        "properties": {
+          "todoTitle": {
+            "type": "string",
+            "title": "Name of todo item"
+          },
+          "isComplete": {
+            "type": "boolean",
+            "title": "Completed",
+            "default": false
+          }
+        }
+      }
+      
+    }
+  }
+}

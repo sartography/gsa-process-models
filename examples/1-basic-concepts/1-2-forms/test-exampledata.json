@@ -1,0 +1,32 @@
+{
+  "tasks": [
+    {
+      "done": false,
+      "title": "dsasdfasdf"
+    },
+    {
+      "done": false,
+      "title": "asdfasdf"
+    }
+  ],
+  "firstName": "Chuck data",
+  "lastName": "Norris",
+  "age": 83,
+  "bio": "Chuck Norris was once bitten by a poisonous snake. And after a week of excruciating pain, the snake died.",
+  "favoriteFruit": "oranges",
+  "telephone": "+1 540-555-1234",
+  "fruits": [
+    {
+      "value": "apples",
+      "label": "Apples"
+    },
+    {
+      "value": "oranges",
+      "label": "Oranges"
+    },
+    {
+      "value": "bananas",
+      "label": "Bananas"
+    }
+  ]
+}

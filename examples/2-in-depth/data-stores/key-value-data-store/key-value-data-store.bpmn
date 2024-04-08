@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:spiffworkflow="http://spiffworkflow.org/bpmn/schema/1.0/core" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_96f6665" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-dev">
+  <bpmn:process id="Process_key_value_data_store_rnri4w9" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_17db3yp</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_17db3yp" sourceRef="StartEvent_1" targetRef="Activity_0qpzdpu" />
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>The process instance completed successfully.</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1akrpry</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_12pkbxb" sourceRef="Activity_0qpzdpu" targetRef="Activity_09lclt7" />
+    <bpmn:scriptTask id="Activity_0qpzdpu" name="Populate the Data Store">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>This is an example **Manual Task**. A **Manual Task** is designed to allow someone to complete a task outside of the system and then report back that it is complete. You can click the *Continue* button to proceed. When you are done running this process, you can edit the **Process Model** to include a:
+
+ * **Script Task** - write a short snippet of python code to update some data
+ *  **User Task** - generate a form that collects information from a user
+ * **Service Task** - communicate with an external API to fetch or update some data.
+
+You can also change the text you are reading here by updating the *Instructions* on this example manual task.</spiffworkflow:instructionsForEndUser>
+        <spiffworkflow:unitTests>
+          <spiffworkflow:unitTest id="ScriptUnitTest_0c8yqh5">
+            <spiffworkflow:inputJson>{}</spiffworkflow:inputJson>
+            <spiffworkflow:expectedOutputJson>{
+  "movies": {
+    "Quentin Tarantino": {
+      "Reservoir Dogs": [
+        {
+          "name": "Mr. White",
+          "actor": "Harvey Keitel",
+          "description": "Veteran criminal leading the heist"
+        },
+        {
+          "name": "Mr. Orange",
+          "actor": "Tim Roth",
+          "description": "Undercover cop infiltrating the gang"
+        },
+        {
+          "name": "Mr. Blonde",
+          "actor": "Michael Madsen",
+          "description": "Sadist and unpredictable gangster"
+        },
+        {
+          "name": "Mr. Pink",
+          "actor": "Steve Buscemi",
+          "description": "Paranoid and argumentative heist member"
+        },
+        {
+          "name": "Joe Cabot",
+          "actor": "Lawrence Tierney",
+          "description": "Powerful crime boss"
+        }
+      ],
+      "Pulp Fiction": [
+        {
+          "name": "Vincent Vega",
+          "actor": "John Travolta",
+          "description": "Hitman with a philosophical bent"
+        },
+        {
+          "name": "Jules Winnfield",
+          "actor": "Samuel L. Jackson",
+          "description": "Bible-quoting hitman with a mysterious past"
+        },
+        {
+          "name": "Mia Wallace",
+          "actor": "Uma Thurman",
+          "description": "Mob wife and recovering addict"
+        },
+        {
+          "name": "Butch Coolidge",
+          "actor": "Bruce Willis",
+          "description": "Boxer on the run after throwing a fight"
+        },
+        {
+          "name": "Winston Wolfe",
+          "actor": "Harvey Keitel",
+          "description": "Problem solver for criminals"
+        }
+      ],
+      "Inglourious Basterds": [
+        {
+          "name": "Lt. Aldo Raine",
+          "actor": "Brad Pitt",
+          "description": "Leader of Jewish-American Nazi hunters"
+        },
+        {
+          "name": "Shosanna Dreyfus",
+          "actor": "Mélanie Laurent",
+          "description": "Jewish woman seeking revenge on Nazis"
+        },
+        {
+          "name": "Col. Hans Landa",
+          "actor": "Christoph Waltz",
+          "description": "Charming yet ruthless SS officer"
+        },
+        {
+          "name": "Sgt. Hugo Stiglitz",
+          "actor": "Til Schweiger",
+          "description": "German soldier turned double agent for the Basterds"
+        },
+        {
+          "name": "Rick Dalton",
+          "actor": "Leonardo DiCaprio",
+          "description": "Faded American actor in Nazi-occupied Germany"
+        }
+      ],
+      "Django Unchained": [
+        {
+          "name": "Django Freeman",
+          "actor": "Jamie Foxx",
+          "description": "Freed slave turned bounty hunter"
+        },
+        {
+          "name": "Dr. King Schultz",
+          "actor": "Christoph Waltz",
+          "description": "Bounty hunter who frees Django"
+        },
+        {
+          "name": "Calvin Candie",
+          "actor": "Leonardo DiCaprio",
+          "description": "Cruel and brutal plantation owner"
+        },
+        {
+          "name": "Stephen",
+          "actor": "Samuel L. Jackson",
+          "description": "Candie's trusted house slave"
+        },
+        {
+          "name": "Broomhilda von Schaft",
+          "actor": "Kerry Washington",
+          "description": "German woman enslaved by Candie"
+        }
+      ]
+    }
+  }
+}</spiffworkflow:expectedOutputJson>
+          </spiffworkflow:unitTest>
+        </spiffworkflow:unitTests>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_17db3yp</bpmn:incoming>
+      <bpmn:outgoing>Flow_12pkbxb</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1pjndnw">
+        <bpmn:targetRef>DataStoreReference_17ombu1</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:script>movies = {
+  "Quentin Tarantino": {
+      "Reservoir Dogs": [
+        {
+          "name": "Mr. White",
+          "actor": "Harvey Keitel",
+          "description": "Veteran criminal leading the heist"
+        },
+        {
+          "name": "Mr. Orange",
+          "actor": "Tim Roth",
+          "description": "Undercover cop infiltrating the gang"
+        },
+        {
+          "name": "Mr. Blonde",
+          "actor": "Michael Madsen",
+          "description": "Sadist and unpredictable gangster"
+        },
+        {
+          "name": "Mr. Pink",
+          "actor": "Steve Buscemi",
+          "description": "Paranoid and argumentative heist member"
+        },
+        {
+          "name": "Joe Cabot",
+          "actor": "Lawrence Tierney",
+          "description": "Powerful crime boss"
+        }
+      ],
+    
+    "Pulp Fiction": [
+        {
+          "name": "Vincent Vega",
+          "actor": "John Travolta",
+          "description": "Hitman with a philosophical bent"
+        },
+        {
+          "name": "Jules Winnfield",
+          "actor": "Samuel L. Jackson",
+          "description": "Bible-quoting hitman with a mysterious past"
+        },
+        {
+          "name": "Mia Wallace",
+          "actor": "Uma Thurman",
+          "description": "Mob wife and recovering addict"
+        },
+        {
+          "name": "Butch Coolidge",
+          "actor": "Bruce Willis",
+          "description": "Boxer on the run after throwing a fight"
+        },
+        {
+          "name": "Winston Wolfe",
+          "actor": "Harvey Keitel",
+          "description": "Problem solver for criminals"
+        }
+      ],
+      "Inglourious Basterds":[
+        {
+          "name": "Lt. Aldo Raine",
+          "actor": "Brad Pitt",
+          "description": "Leader of Jewish-American Nazi hunters"
+        },
+        {
+          "name": "Shosanna Dreyfus",
+          "actor": "Mélanie Laurent",
+          "description": "Jewish woman seeking revenge on Nazis"
+        },
+        {
+          "name": "Col. Hans Landa",
+          "actor": "Christoph Waltz",
+          "description": "Charming yet ruthless SS officer"
+        },
+        {
+          "name": "Sgt. Hugo Stiglitz",
+          "actor": "Til Schweiger",
+          "description": "German soldier turned double agent for the Basterds"
+        },
+        {
+          "name": "Rick Dalton",
+          "actor": "Leonardo DiCaprio",
+          "description": "Faded American actor in Nazi-occupied Germany"
+        }
+      ],
+      "Django Unchained": [
+        {
+          "name": "Django Freeman",
+          "actor": "Jamie Foxx",
+          "description": "Freed slave turned bounty hunter"
+        },
+        {
+          "name": "Dr. King Schultz",
+          "actor": "Christoph Waltz",
+          "description": "Bounty hunter who frees Django"
+        },
+        {
+          "name": "Calvin Candie",
+          "actor": "Leonardo DiCaprio",
+          "description": "Cruel and brutal plantation owner"
+        },
+        {
+          "name": "Stephen",
+          "actor": "Samuel L. Jackson",
+          "description": "Candie's trusted house slave"
+        },
+        {
+          "name": "Broomhilda von Schaft",
+          "actor": "Kerry Washington",
+          "description": "German woman enslaved by Candie"
+        }
+      ]
+    }
+}</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:dataStoreReference id="DataStoreReference_17ombu1" name="movies" dataStoreRef="movies" type="kkv" />
+    <bpmn:scriptTask id="Activity_09lclt7" name="Extract Single Record from Data Store">
+      <bpmn:incoming>Flow_12pkbxb</bpmn:incoming>
+      <bpmn:outgoing>Flow_032ykz8</bpmn:outgoing>
+      <bpmn:property id="Property_1yu6oue" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_1ax1ize">
+        <bpmn:sourceRef>DataStoreReference_17ombu1</bpmn:sourceRef>
+        <bpmn:targetRef>Property_1yu6oue</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:script>django = movies("Quentin Tarantino", "Django Unchained")
+
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:dataStoreReference id="DataStoreReference_1iq4dmk" name="movies" dataStoreRef="movies" type="kkv" />
+    <bpmn:sequenceFlow id="Flow_1akrpry" sourceRef="Activity_0ttl2d6" targetRef="EndEvent_1" />
+    <bpmn:sequenceFlow id="Flow_032ykz8" sourceRef="Activity_09lclt7" targetRef="Activity_0ttl2d6" />
+    <bpmn:scriptTask id="Activity_0ttl2d6" name="Insert A Single Record into a Data Store">
+      <bpmn:incoming>Flow_032ykz8</bpmn:incoming>
+      <bpmn:outgoing>Flow_1akrpry</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_03afm2r">
+        <bpmn:targetRef>DataStoreReference_1iq4dmk</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:script># Add a single movie
+
+movies = {
+  "Wes Craven": {
+      "Swamp Thing": [
+        {
+          "name": "Dr. Alec Hollard",
+          "actor": "Ray Wise",
+          "description": "whatever"
+        },
+      ]
+  }
+}</bpmn:script>
+    </bpmn:scriptTask>
+  </bpmn:process>
+  <bpmn:dataStore id="movies" name="KKVDataStore" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_key_value_data_store_rnri4w9">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1yz3n3c_di" bpmnElement="Activity_0qpzdpu">
+        <dc:Bounds x="270" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_17ombu1_di" bpmnElement="DataStoreReference_17ombu1">
+        <dc:Bounds x="355" y="275" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="362" y="332" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00jaglm_di" bpmnElement="Activity_09lclt7">
+        <dc:Bounds x="420" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_1iq4dmk_di" bpmnElement="DataStoreReference_1iq4dmk">
+        <dc:Bounds x="595" y="275" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="602" y="332" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1fujp1k_di" bpmnElement="Activity_0ttl2d6">
+        <dc:Bounds x="570" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_14za570_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="742" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_17db3yp_di" bpmnElement="Flow_17db3yp">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="270" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12pkbxb_di" bpmnElement="Flow_12pkbxb">
+        <di:waypoint x="370" y="177" />
+        <di:waypoint x="420" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1pjndnw_di" bpmnElement="DataOutputAssociation_1pjndnw">
+        <di:waypoint x="343" y="217" />
+        <di:waypoint x="376" y="275" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1ax1ize_di" bpmnElement="DataInputAssociation_1ax1ize">
+        <di:waypoint x="404" y="275" />
+        <di:waypoint x="460" y="217" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1akrpry_di" bpmnElement="Flow_1akrpry">
+        <di:waypoint x="670" y="177" />
+        <di:waypoint x="742" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_032ykz8_di" bpmnElement="Flow_032ykz8">
+        <di:waypoint x="520" y="177" />
+        <di:waypoint x="570" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_03afm2r_di" bpmnElement="DataOutputAssociation_03afm2r">
+        <di:waypoint x="618" y="217" />
+        <di:waypoint x="616" y="275" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

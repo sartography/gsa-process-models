@@ -1,0 +1,14 @@
+{
+  "title": "",
+  "description": "The dropdown list below is built from data read in from a json file.",
+  "type": "object",
+  "properties": {
+    "selected": {
+      "title": "Select your flavor of gatoraide",
+      "type": "string",
+      "anyOf": [
+        "options_from_task_data_var:gator_select"
+      ]
+    }
+  }
+}

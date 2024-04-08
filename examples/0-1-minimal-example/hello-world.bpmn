@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:spiffworkflow="http://spiffworkflow.org/bpmn/schema/1.0/core" id="Definitions_96f6665" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-dev">
+  <bpmn:process id="Process_7kik021" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0ign3x0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_1nuxsxl">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>## Great Job!  
+
+You have completed your first diagram!  
+
+If you look below you will see the diagram you just completed.
+You can open this diagram up in our editor where you can move things around, click on elements and view their properties.  This is a great way to learn how diagrams are put together.  To do so, click on "Minimal Example" in the breadcrumbs at the top of this page, and then open the file "hello-world.bpmn"
+
+If you are interested in building your own diagrams, you can request access to a private "Playground" where you can build models and test out your own ideas.   We'll tell you more about this later. 
+
+## Next Steps
+1. Check out the [Essentials Example](https://spiffdemo.org/admin/process-models/examples:0-2-basic-example) under the Examples group to get a better sense of the expressiveness of the BPMN Modeling Language and what you can do with SpiffWorkflow.
+2. Open up the ["1. Basics" Group](https://spiffdemo.org/admin/process-groups/examples:1-basic-concepts) for a set of additional examples that will introduce you to topics one at a time.
+3. If you haven't already please check out our [Documentation for Spiff-Arena](https://spiff-arena.readthedocs.io/en/latest/) which is a great way to get oriented so you can move through these examples with ease.</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0aw40yc</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0aw40yc" sourceRef="Activity_0j3j0ev" targetRef="Event_1nuxsxl" />
+    <bpmn:manualTask id="Activity_0j3j0ev" name="Show Example Manual Task">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>### What is "Hello World"?
+
+Hello World is a common way to introduce people to a new programming language.   It shows the minimum amount of work required to make something (anything) happen.  
+
+This example is not very interesting to run, so be sure to look under the files tab on the Process Model page to see how it was built. 
+
+Press continue and we'll tell you more ...
+
+</spiffworkflow:instructionsForEndUser>
+        <spiffworkflow:allowGuest>false</spiffworkflow:allowGuest>
+        <spiffworkflow:guestConfirmation>Welcome to the basic process!</spiffworkflow:guestConfirmation>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0ign3x0</bpmn:incoming>
+      <bpmn:outgoing>Flow_0aw40yc</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:sequenceFlow id="Flow_0ign3x0" sourceRef="StartEvent_1" targetRef="Activity_0j3j0ev" />
+    <bpmn:textAnnotation id="TextAnnotation_1yze331">
+      <bpmn:text>This manual task will display a message and wait for the end user to click "Continue".  The message displayed is set in the "Instructions" field in the properties panel to the right when this task is selected.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_13sqazn" sourceRef="Activity_0j3j0ev" targetRef="TextAnnotation_1yze331" />
+    <bpmn:textAnnotation id="TextAnnotation_1vdnvgp">
+      <bpmn:text>This is the "Start Event" and marks the starting point for a process.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0272evq" sourceRef="StartEvent_1" targetRef="TextAnnotation_1vdnvgp" />
+    <bpmn:textAnnotation id="TextAnnotation_03jcjkk">
+      <bpmn:text>This is the "End Event" and stops the process from running.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_080lb5b" sourceRef="Event_1nuxsxl" targetRef="TextAnnotation_03jcjkk" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_7kik021">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="322" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1nuxsxl_di" bpmnElement="Event_1nuxsxl">
+        <dc:Bounds x="622" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0crrakz_di" bpmnElement="Activity_0j3j0ev">
+        <dc:Bounds x="450" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1yze331_di" bpmnElement="TextAnnotation_1yze331">
+        <dc:Bounds x="404" y="-65" width="192" height="113" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1vdnvgp_di" bpmnElement="TextAnnotation_1vdnvgp">
+        <dc:Bounds x="260" y="-7" width="99.99999999999999" height="84.15336879432623" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_03jcjkk_di" bpmnElement="TextAnnotation_03jcjkk">
+        <dc:Bounds x="620" y="7" width="150" height="56" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0aw40yc_di" bpmnElement="Flow_0aw40yc">
+        <di:waypoint x="550" y="177" />
+        <di:waypoint x="622" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ign3x0_di" bpmnElement="Flow_0ign3x0">
+        <di:waypoint x="358" y="177" />
+        <di:waypoint x="450" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_13sqazn_di" bpmnElement="Association_13sqazn">
+        <di:waypoint x="489" y="137" />
+        <di:waypoint x="464" y="48" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0272evq_di" bpmnElement="Association_0272evq">
+        <di:waypoint x="337" y="160" />
+        <di:waypoint x="322" y="77" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_080lb5b_di" bpmnElement="Association_080lb5b">
+        <di:waypoint x="643" y="160" />
+        <di:waypoint x="662" y="63" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

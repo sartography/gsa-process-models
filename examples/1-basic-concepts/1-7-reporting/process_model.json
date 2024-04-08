@@ -1,0 +1,14 @@
+{
+    "description": "Metadata and milestones - getting specific reports about running processes and tracking special events during the lifecycle of a process",
+    "display_name": "Gathering Information",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": [
+        {
+            "key": "spam_thought",
+            "path": "spam_thought"
+        }
+    ],
+    "primary_file_name": "metadata.bpmn",
+    "primary_process_id": "Process_ndztlol"
+}

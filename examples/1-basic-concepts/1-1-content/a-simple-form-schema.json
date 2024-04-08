@@ -1,0 +1,18 @@
+{
+  "title": "Simple Form",
+  "required": [
+    "first_name",
+    "is_joke"
+  ],
+  "properties": {
+    "first_name": {
+      "type": "string",
+      "title": "First Name"
+    },
+    "is_joke": {
+      "type": "boolean",
+      "title": "Would you like to hear a Chuck Norris joke?"
+    }
+  },
+  "type": "object"
+}

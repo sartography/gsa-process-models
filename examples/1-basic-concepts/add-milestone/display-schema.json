@@ -1,0 +1,26 @@
+{
+  "title": "Product Catalog Schema",
+  "description": "Schema for product data in a catalog",
+  "type": "object",
+  "properties": {
+    "productId": {
+      "type": "integer",
+      "description": "An identifier for the product"
+    },
+    "productName": {
+      "type": "string",
+      "description": "The product name"
+    },
+    "price": {
+      "type": "number",
+      "description": "The cost to the consumer"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "An optional array of identifying tags"
+    }
+  }
+}

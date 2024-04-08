@@ -1,0 +1,7 @@
+{
+    "admin": false,
+    "description": "COMING SOON - This example covers how you can make API calls to other services and applications.  Anything from checking in the weather from an open API, to tracking down the current manager of an employee by communicating over a secure connection to your HR software system.",
+    "display_name": "External Services",
+    "display_order": 20,
+    "parent_groups": null
+}

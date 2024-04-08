@@ -1,0 +1,4 @@
+{
+    "description": "This extension allow users to add and delete api keys. To use the api key, pass it in as a header to the backed as \"X-API-KEY\".",
+    "display_name": "Api keys"
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:spiffworkflow="http://spiffworkflow.org/bpmn/schema/1.0/core" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_96f6665" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-dev">
+  <bpmn:process id="todo_list_process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1ib2y93</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1ib2y93" sourceRef="StartEvent_1" targetRef="set_up_default_todo_items" />
+    <bpmn:endEvent id="Event_0ctebzc">
+      <bpmn:incoming>Flow_061r409</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_061r409" sourceRef="manage_todo_list" targetRef="Event_0ctebzc" />
+    <bpmn:userTask id="manage_todo_list" name="Manage Todo List">
+      <bpmn:extensionElements>
+        <spiffworkflow:properties>
+          <spiffworkflow:property name="formJsonSchemaFilename" value="todolist_schema.json" />
+          <spiffworkflow:property name="formUiSchemaFilename" value="todolist_uischema.json" />
+        </spiffworkflow:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1cg97dk</bpmn:incoming>
+      <bpmn:outgoing>Flow_061r409</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1cg97dk" sourceRef="set_up_default_todo_items" targetRef="manage_todo_list" />
+    <bpmn:scriptTask id="set_up_default_todo_items" name="Set Up Default Todo Items">
+      <bpmn:incoming>Flow_1ib2y93</bpmn:incoming>
+      <bpmn:outgoing>Flow_1cg97dk</bpmn:outgoing>
+      <bpmn:script>todoList = [
+    {
+      "todoTitle": "Milk",
+      "isComplete": False
+    },
+    {
+      "todoTitle": "Eggs",
+      "isComplete": False
+    }
+]</bpmn:script>
+    </bpmn:scriptTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="todo_list_process">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ctebzc_di" bpmnElement="Event_0ctebzc">
+        <dc:Bounds x="542" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1hm6l6g_di" bpmnElement="manage_todo_list">
+        <dc:Bounds x="400" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0h8wobo_di" bpmnElement="set_up_default_todo_items">
+        <dc:Bounds x="250" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1ib2y93_di" bpmnElement="Flow_1ib2y93">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="250" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_061r409_di" bpmnElement="Flow_061r409">
+        <di:waypoint x="500" y="177" />
+        <di:waypoint x="542" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1cg97dk_di" bpmnElement="Flow_1cg97dk">
+        <di:waypoint x="350" y="177" />
+        <di:waypoint x="400" y="177" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

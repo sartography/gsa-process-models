@@ -1,0 +1,9 @@
+{
+    "description": "A new Chef process is started each time a waiter enters an order.   When the chef completes the order he responds with a message back to the original waiter - the one that entered the order, by using a correlation key.",
+    "display_name": "Chef",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "simple-message-chef.bpmn",
+    "primary_process_id": "Process_c707ql0"
+}

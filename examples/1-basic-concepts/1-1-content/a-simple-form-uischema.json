@@ -1,0 +1,8 @@
+{
+  "is_joke": {
+    "ui:widget": "radio",
+    "ui:options": {
+      "inline": true
+    }
+  }
+}

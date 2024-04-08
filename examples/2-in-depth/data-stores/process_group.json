@@ -1,0 +1,49 @@
+{
+    "data_store_specifications": {
+        "json": {
+            "german_philosophers": {
+                "description": "This is a list of famous German Philosophers ",
+                "identifier": "german_philosophers",
+                "location": "examples/2-in-depth/data-stores",
+                "name": "German Philosophers",
+                "schema": {}
+            }
+        },
+        "kkv": {
+            "movies": {
+                "description": "List of movies with a primary key of Director, and a sub key of movie - the values are a list of characters in the movie.",
+                "identifier": "movies",
+                "location": "examples/2-in-depth/data-stores",
+                "name": "Movies",
+                "schema": {
+                    "description": "List of characters in the movie",
+                    "items": {
+                        "properties": {
+                            "actor": {
+                                "description": "Actor who portrays the character",
+                                "type": "string"
+                            },
+                            "description": {
+                                "description": "Brief description of the character",
+                                "type": "string"
+                            },
+                            "name": {
+                                "description": "Name of the character",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "actor",
+                            "description"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            }
+        }
+    },
+    "description": "An example of how to use a Data Store to keep track of information.",
+    "display_name": "Data Stores"
+}

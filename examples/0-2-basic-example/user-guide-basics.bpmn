@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:spiffworkflow="http://spiffworkflow.org/bpmn/schema/1.0/core" id="Definitions_96f6665" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-dev">
+  <bpmn:process id="Proccess_rlm9uj3" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1bsnw7a</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Activity_s__QUALI__" name="Display Questions">
+      <bpmn:extensionElements>
+        <spiffworkflow:properties>
+          <spiffworkflow:property name="formJsonSchemaFilename" value="norris-schema.json" />
+          <spiffworkflow:property name="formUiSchemaFilename" value="norris-uischema.json" />
+        </spiffworkflow:properties>
+        <spiffworkflow:instructionsForEndUser>### Lets play a game.
+
+We are going to check to see if you know the real [Chuck Norris](https://en.wikipedia.org/wiki/Chuck_Norris). If you do know him, we will reward you with a picture of the eternally handsome man in all of his glory.
+
+If you do not know anything about Chuck Norris, we will be forced to punish you with a picture of [Steven Seagal](https://en.wikipedia.org/wiki/Steven_Seagal).
+
+If you do not appreciate references to dated 19th century American made martial arts films, you are not alone.  We'll try to keep the jokes to a minimum so you can learn more about SpiffWorkflow and less about impossibly bad acting. </spiffworkflow:instructionsForEndUser>
+        <spiffworkflow:preScript />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0scd0lj</bpmn:incoming>
+      <bpmn:outgoing>Flow_1195zgn</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_0c62aiv">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser># Great Job!
+
+If your business process has next steps that depend on what happened in the process, you can have this summary or call to action reflect what happened in the process.
+In this case, it doesn't matter if you know anything about Chuck Norris.  But it does matter that you have learned a little about SpiffWorkflow and the BPMN notation that allows you to describe complex processes in a simple and intuitive way!
+
+## Next Steps
+Check out the "[1. Basics](https://spiffdemo.org/admin/process-groups/examples:1-basic-concepts)" Process Group under Examples. It will cover most of items you see here in more detail.  There you can get detailed examples on how to present complex information to end users, in our tutorial on [Displaying Content](https://spiffdemo.org/admin/process-models/examples:1-basic-concepts:1-1-content)</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_11xcbxo</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1195zgn" sourceRef="Activity_s__QUALI__" targetRef="Activity_s__CNECT__" />
+    <bpmn:manualTask id="Activity_0s0ak1j" name="0 Correct">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>## Total failure
+
+{{score_message }}
+
+That was a terrible response.  
+As punishment, you are presented with this picture of Steven Seagal.  
+
+![Steven Seagal](https://upload.wikimedia.org/wikipedia/commons/d/d9/Steven_Seagal_November_2016.jpg)</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1vku47h</bpmn:incoming>
+      <bpmn:outgoing>Flow_12yxktn</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:scriptTask id="Activity_s__CNECT__" name="Modify Information" scriptFormat="python">
+      <bpmn:extensionElements>
+        <spiffworkflow:unitTests>
+          <spiffworkflow:unitTest id="ScriptUnitTest_0tcx1qq">
+            <spiffworkflow:inputJson>{
+  "bulletproof": true,
+  "thanos": false,
+  "pushups": true
+}</spiffworkflow:inputJson>
+            <spiffworkflow:expectedOutputJson>{
+  "bulletproof": true,
+  "pushups": true,
+  "score": 3,
+  "thanos": true
+}</spiffworkflow:expectedOutputJson>
+          </spiffworkflow:unitTest>
+        </spiffworkflow:unitTests>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1195zgn</bpmn:incoming>
+      <bpmn:outgoing>Flow_1vfw75z</bpmn:outgoing>
+      <bpmn:script># Here we calculate a score in Python in a short script.
+# In the next model we will show how to do the same thing with a decision table.
+
+score = 0
+if bulletproof:
+  score = score + 1
+
+if not thanos:
+  score = score + 1
+
+if pushups:
+  score = score + 1  
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:businessRuleTask id="Activity_0sualuq" name="Determine Score Message">
+      <bpmn:extensionElements>
+        <spiffworkflow:calledDecisionId>decision_1</spiffworkflow:calledDecisionId>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1vfw75z</bpmn:incoming>
+      <bpmn:outgoing>Flow_0z9399c</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:sequenceFlow id="Flow_1vfw75z" sourceRef="Activity_s__CNECT__" targetRef="Activity_0sualuq" />
+    <bpmn:sequenceFlow id="Flow_0z9399c" sourceRef="Activity_0sualuq" targetRef="Gateway_1nez60d" />
+    <bpmn:exclusiveGateway id="Gateway_1nez60d" name="The Real Chuck Norris?" default="Flow_0d2kg99">
+      <bpmn:incoming>Flow_0z9399c</bpmn:incoming>
+      <bpmn:outgoing>Flow_1vku47h</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0d2kg99</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0drf819</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:manualTask id="Activity_1aggwmx" name="Some Correct">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>## Not Bad
+
+{{score_message}}
+
+You know a little about Chuck Norris.  Not everything.  But we are still impressed.
+You don't get to see a complete picture of Chuck, as he is disappointed in you.   But not everyone can live up to his expectations.
+</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0d2kg99</bpmn:incoming>
+      <bpmn:outgoing>Flow_1yshk2s</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:exclusiveGateway id="Gateway_1em7510">
+      <bpmn:incoming>Flow_12yxktn</bpmn:incoming>
+      <bpmn:incoming>Flow_1yshk2s</bpmn:incoming>
+      <bpmn:incoming>Flow_0wc765s</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hzwehr</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_12yxktn" sourceRef="Activity_0s0ak1j" targetRef="Gateway_1em7510" />
+    <bpmn:sequenceFlow id="Flow_1yshk2s" sourceRef="Activity_1aggwmx" targetRef="Gateway_1em7510" />
+    <bpmn:manualTask id="Activity_s__NEW__" name="Introduction">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>## Welcome to a Basic Example
+
+This process model will use all of the concepts covered individually in the "Basics" Process Group (available under Process Models / Examples / 1. Basics).  It is worth viewing this early on to help paint a clearer picture of how components can be used together.  It is also worth revisiting after you look at the Basics Topics individually as you will have a fresh appreciation for how these individual components work, and you can better understand how they can be used together to powerful effect!
+
+&gt; NOTE:  As you step through this process - click on the "Process Instance Id: ##" in the breadcrumbs at the top of the page, and view the diagram.  You will see it is keeping track of where you are.  You can use the "Go" button to pick up where you left off.
+
+
+## Next Steps
+1. Click 'Continue' below to step through this diagram. </spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1bsnw7a</bpmn:incoming>
+      <bpmn:incoming>Flow_1ul9fun</bpmn:incoming>
+      <bpmn:outgoing>Flow_0scd0lj</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:sequenceFlow id="Flow_1bsnw7a" sourceRef="StartEvent_1" targetRef="Activity_s__NEW__" />
+    <bpmn:sequenceFlow id="Flow_0scd0lj" sourceRef="Activity_s__NEW__" targetRef="Activity_s__QUALI__" />
+    <bpmn:sequenceFlow id="Flow_0hzwehr" sourceRef="Gateway_1em7510" targetRef="Activity_0shivvb" />
+    <bpmn:manualTask id="Activity_0shivvb" name="Review">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>## Mostly Done!
+
+You are now almost to the final task.  We pause here to add an option to loop back to the beginning of the process and to demonstrate an Event.  Events provide a way for external forces to change the course of a workflow.  This can be through a timer (after 2 weeks without a response, cancel the request) or a message (allow our HR application to cancel a request by making an API call) or, in this case through an extra button that you can press in the user interface.
+
+To cause the event to fire just click on the "Try Again!" button below, or click "Continue" to complete the process and move on to the next example.
+
+</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0hzwehr</bpmn:incoming>
+      <bpmn:outgoing>Flow_11xcbxo</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:sequenceFlow id="Flow_11xcbxo" sourceRef="Activity_0shivvb" targetRef="Event_0c62aiv" />
+    <bpmn:boundaryEvent id="Event_06zobyd" attachedToRef="Activity_0shivvb">
+      <bpmn:extensionElements>
+        <spiffworkflow:signalButtonLabel>Try Again!</spiffworkflow:signalButtonLabel>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_1ul9fun</bpmn:outgoing>
+      <bpmn:signalEventDefinition id="SignalEventDefinition_0nrtqfp" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1ul9fun" sourceRef="Event_06zobyd" targetRef="Activity_s__NEW__" />
+    <bpmn:sequenceFlow id="Flow_1vku47h" name="score == 0" sourceRef="Gateway_1nez60d" targetRef="Activity_0s0ak1j">
+      <bpmn:conditionExpression>score == 0</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0d2kg99" sourceRef="Gateway_1nez60d" targetRef="Activity_1aggwmx" />
+    <bpmn:sequenceFlow id="Flow_0drf819" name="score == 3" sourceRef="Gateway_1nez60d" targetRef="Activity_06mkd76">
+      <bpmn:conditionExpression>score == 3</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0wc765s" sourceRef="Activity_06mkd76" targetRef="Gateway_1em7510" />
+    <bpmn:manualTask id="Activity_06mkd76" name="Perfect Score">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>## Perfect Score!!!!
+
+{{score_message}}
+
+
+Chuck Norris is proud of you.
+
+![Chuck Norris is Proud of you](https://upload.wikimedia.org/wikipedia/commons/3/30/Chuck_Norris_May_2015.jpg)</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0drf819</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wc765s</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:textAnnotation id="TextAnnotation_0xdb2cj">
+      <bpmn:text>User Tasks allow you to collect information from real people through web forms.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1puha8q" sourceRef="Activity_s__QUALI__" targetRef="TextAnnotation_0xdb2cj" />
+    <bpmn:textAnnotation id="TextAnnotation_002deu1">
+      <bpmn:text>Script Tasks provide a quick simple way to modify the data you collect.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0xyvy14" sourceRef="Activity_s__CNECT__" targetRef="TextAnnotation_002deu1" />
+    <bpmn:textAnnotation id="TextAnnotation_0u3ff93">
+      <bpmn:text>Decision Tables are a great way to describe a set of business rules in a way that is easy to maintain and understand.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1buqr4e" sourceRef="Activity_0sualuq" targetRef="TextAnnotation_0u3ff93" />
+    <bpmn:textAnnotation id="TextAnnotation_1om7utz">
+      <bpmn:text>Gateways allow your processes to branch off in different directions.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0cwwslt" sourceRef="Gateway_1nez60d" targetRef="TextAnnotation_1om7utz" />
+    <bpmn:textAnnotation id="TextAnnotation_0wvj38r">
+      <bpmn:text>BPMN allows us to loop back around to previous points in a diagram.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0yzn73r" sourceRef="Flow_1ul9fun" targetRef="TextAnnotation_0wvj38r" />
+    <bpmn:textAnnotation id="TextAnnotation_1vf1ktl">
+      <bpmn:text>Events allow external forces (or internal errors) to interact with a process.  Here we allow a button press to interrupt the normal course of the diagram.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1av5ri4" sourceRef="Event_06zobyd" targetRef="TextAnnotation_1vf1ktl" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Proccess_rlm9uj3">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="-198" y="199" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_15rn7j8_di" bpmnElement="Activity_s__QUALI__">
+        <dc:Bounds x="60" y="177" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0c62aiv_di" bpmnElement="Event_0c62aiv">
+        <dc:Bounds x="1102" y="199" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1235hph_di" bpmnElement="Activity_0s0ak1j">
+        <dc:Bounds x="670" y="70" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qqdrd7_di" bpmnElement="Activity_s__CNECT__">
+        <dc:Bounds x="210" y="177" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0igyd4t_di" bpmnElement="Activity_0sualuq">
+        <dc:Bounds x="360" y="177" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1nez60d_di" bpmnElement="Gateway_1nez60d" isMarkerVisible="true">
+        <dc:Bounds x="535" y="192" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="470" y="176" width="80" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0nv529h_di" bpmnElement="Activity_1aggwmx">
+        <dc:Bounds x="670" y="177" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1em7510_di" bpmnElement="Gateway_1em7510" isMarkerVisible="true">
+        <dc:Bounds x="825" y="192" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0j641hg_di" bpmnElement="Activity_s__NEW__">
+        <dc:Bounds x="-100" y="177" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1dcxppy_di" bpmnElement="Activity_0shivvb">
+        <dc:Bounds x="940" y="177" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_084sb9g_di" bpmnElement="Activity_06mkd76">
+        <dc:Bounds x="670" y="280" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0xdb2cj_di" bpmnElement="TextAnnotation_0xdb2cj">
+        <dc:Bounds x="50" y="13" width="120" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_002deu1_di" bpmnElement="TextAnnotation_002deu1">
+        <dc:Bounds x="210" y="3" width="100" height="84" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0u3ff93_di" bpmnElement="TextAnnotation_0u3ff93">
+        <dc:Bounds x="360" y="3" width="100" height="127" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1om7utz_di" bpmnElement="TextAnnotation_1om7utz">
+        <dc:Bounds x="510" y="3" width="100" height="84" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0wvj38r_di" bpmnElement="TextAnnotation_0wvj38r">
+        <dc:Bounds x="300" y="310" width="160" height="57" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1vf1ktl_di" bpmnElement="TextAnnotation_1vf1ktl">
+        <dc:Bounds x="1030" y="293" width="150" height="127" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ormxal_di" bpmnElement="Event_06zobyd">
+        <dc:Bounds x="992" y="239" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1195zgn_di" bpmnElement="Flow_1195zgn">
+        <di:waypoint x="160" y="217" />
+        <di:waypoint x="210" y="217" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1vfw75z_di" bpmnElement="Flow_1vfw75z">
+        <di:waypoint x="310" y="217" />
+        <di:waypoint x="360" y="217" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0z9399c_di" bpmnElement="Flow_0z9399c">
+        <di:waypoint x="460" y="217" />
+        <di:waypoint x="535" y="217" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12yxktn_di" bpmnElement="Flow_12yxktn">
+        <di:waypoint x="770" y="110" />
+        <di:waypoint x="850" y="110" />
+        <di:waypoint x="850" y="192" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1yshk2s_di" bpmnElement="Flow_1yshk2s">
+        <di:waypoint x="770" y="217" />
+        <di:waypoint x="825" y="217" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bsnw7a_di" bpmnElement="Flow_1bsnw7a">
+        <di:waypoint x="-162" y="217" />
+        <di:waypoint x="-100" y="217" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0scd0lj_di" bpmnElement="Flow_0scd0lj">
+        <di:waypoint x="0" y="217" />
+        <di:waypoint x="60" y="217" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hzwehr_di" bpmnElement="Flow_0hzwehr">
+        <di:waypoint x="875" y="217" />
+        <di:waypoint x="940" y="217" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11xcbxo_di" bpmnElement="Flow_11xcbxo">
+        <di:waypoint x="1040" y="217" />
+        <di:waypoint x="1102" y="217" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ul9fun_di" bpmnElement="Flow_1ul9fun">
+        <di:waypoint x="1010" y="275" />
+        <di:waypoint x="1010" y="410" />
+        <di:waypoint x="-50" y="410" />
+        <di:waypoint x="-50" y="257" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1vku47h_di" bpmnElement="Flow_1vku47h">
+        <di:waypoint x="560" y="192" />
+        <di:waypoint x="560" y="110" />
+        <di:waypoint x="670" y="110" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="585" y="113" width="52" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0d2kg99_di" bpmnElement="Flow_0d2kg99">
+        <di:waypoint x="585" y="217" />
+        <di:waypoint x="670" y="217" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0drf819_di" bpmnElement="Flow_0drf819">
+        <di:waypoint x="560" y="242" />
+        <di:waypoint x="560" y="320" />
+        <di:waypoint x="670" y="320" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="585" y="303" width="52" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wc765s_di" bpmnElement="Flow_0wc765s">
+        <di:waypoint x="770" y="320" />
+        <di:waypoint x="850" y="320" />
+        <di:waypoint x="850" y="242" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1puha8q_di" bpmnElement="Association_1puha8q">
+        <di:waypoint x="110" y="177" />
+        <di:waypoint x="110" y="93" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0xyvy14_di" bpmnElement="Association_0xyvy14">
+        <di:waypoint x="260" y="177" />
+        <di:waypoint x="260" y="87" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1buqr4e_di" bpmnElement="Association_1buqr4e">
+        <di:waypoint x="410" y="177" />
+        <di:waypoint x="410" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0cwwslt_di" bpmnElement="Association_0cwwslt">
+        <di:waypoint x="558" y="194" />
+        <di:waypoint x="551" y="87" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0yzn73r_di" bpmnElement="Association_0yzn73r">
+        <di:waypoint x="505" y="410" />
+        <di:waypoint x="437" y="367" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1av5ri4_di" bpmnElement="Association_1av5ri4">
+        <di:waypoint x="1024" y="268" />
+        <di:waypoint x="1056" y="293" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

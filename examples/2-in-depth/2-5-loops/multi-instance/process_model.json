@@ -1,0 +1,9 @@
+{
+    "description": "How to loop over a set of items in a list or dictionary, performing the same task on each item.",
+    "display_name": "Multi Instance ",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "multi-instance.bpmn",
+    "primary_process_id": "Process_multi_instance_f7w10zo"
+}

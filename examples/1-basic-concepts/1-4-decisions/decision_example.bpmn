@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:spiffworkflow="http://spiffworkflow.org/bpmn/schema/1.0/core" id="Definitions_96f6665" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-dev">
+  <bpmn:process id="Process_5bmdbcp" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0brrubl</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0brrubl" sourceRef="StartEvent_1" targetRef="Activity_1vwj16k" />
+    <bpmn:endEvent id="Event_1fw7s4u">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>Thanks for checking out our introduction to Decision Tables - this example was very simple, but you will find it is an excellent way to represent complex business rules simply and cleanly. 
+
+ Future articles can show you how to expose this logic as an API endpoint -- imagine if your sales team had that kind of immediate control - and could stipulate A/B price splits based on arbitrary market segments and do this independently of your E-Commerce Web team, which just asks SpiffWorkflow's API what prices to show for a given person.
+
+### What's Next?
+
+Please check back frequently, we will be adding new documentation and examples on a regular basis.  
+
+### Get Involved!
+Please get in touch with us!  We would love to help you define your business rules using the concise beauty of DMN Decision Tables.  There is no end to what we can accomplish if we work together.  Please reach out to Dan at [dan@sartography.com](mailto:dan@sartography.com) to get started.</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0ynedxh</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1xe4aue" sourceRef="Activity_1vwj16k" targetRef="Activity_0gw3mlc" />
+    <bpmn:userTask id="Activity_1vwj16k" name="Select a Pizza">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>Please complete the sample pizza order form below.  We'll run your selection through a decision table, and we can tell you how much it will cost.</spiffworkflow:instructionsForEndUser>
+        <spiffworkflow:properties>
+          <spiffworkflow:property name="formJsonSchemaFilename" value="select-a-pizza-schema.json" />
+          <spiffworkflow:property name="formUiSchemaFilename" value="select-a-pizza-uischema.json" />
+        </spiffworkflow:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0brrubl</bpmn:incoming>
+      <bpmn:outgoing>Flow_1xe4aue</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0e1e8hs" sourceRef="Activity_0gw3mlc" targetRef="Activity_0tfliws" />
+    <bpmn:businessRuleTask id="Activity_0gw3mlc" name="Determine Price">
+      <bpmn:extensionElements>
+        <spiffworkflow:calledDecisionId>decision_abc</spiffworkflow:calledDecisionId>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1xe4aue</bpmn:incoming>
+      <bpmn:outgoing>Flow_0e1e8hs</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:sequenceFlow id="Flow_0ynedxh" sourceRef="Activity_0tfliws" targetRef="Event_1fw7s4u" />
+    <bpmn:manualTask id="Activity_0tfliws" name="Receipt">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>
+### Order Details
+
+The base price for your {{size}} Pizza is {{ "${:,.2f}".format(base_price) }}.
+
+Additional toppings for a {{size}} Pizza cost {{ "${:,.2f}".format(cost_per_topping) }}. 
+
+The total cost of your pizza is {{ "${:,.2f}".format(total_cost) }}. 
+
+Thank you for your order! 
+
+#### Calculations
+We used a decision table to come up with the total costs.  Decision tables, in the simplest form are a series of conditions stated like **IF** this is true **THEN** this is the result.  You can open the file up by going to the Model and clicking on the pizza_prizes.dmn table.  But here is a sample of what it contains:
+
+
+| when **Size** | then **base_price** | and **cost_per_topping** |
+| ----- | ----- | ----- |
+| "Personal" | 10.00 | 1.00 |
+| "Medium" | 14.00 | 1.50 |
+| "Large" | 16.00 | 2.00 |
+
+Decision tables are a great way to define a set of business requirements clearly and consistently, and in a way that is super easy to maintain over time.  </spiffworkflow:instructionsForEndUser>
+        <spiffworkflow:preScript>total_cost = base_price + len(toppings) * cost_per_topping</spiffworkflow:preScript>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0e1e8hs</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ynedxh</bpmn:outgoing>
+    </bpmn:manualTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_5bmdbcp">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="-368" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1fw7s4u_di" bpmnElement="Event_1fw7s4u">
+        <dc:Bounds x="172" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ip987z_di" bpmnElement="Activity_1vwj16k">
+        <dc:Bounds x="-280" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1thmfhj_di" bpmnElement="Activity_0gw3mlc">
+        <dc:Bounds x="-130" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0lzejwk_di" bpmnElement="Activity_0tfliws">
+        <dc:Bounds x="20" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0brrubl_di" bpmnElement="Flow_0brrubl">
+        <di:waypoint x="-332" y="177" />
+        <di:waypoint x="-280" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xe4aue_di" bpmnElement="Flow_1xe4aue">
+        <di:waypoint x="-180" y="177" />
+        <di:waypoint x="-130" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0e1e8hs_di" bpmnElement="Flow_0e1e8hs">
+        <di:waypoint x="-30" y="177" />
+        <di:waypoint x="20" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ynedxh_di" bpmnElement="Flow_0ynedxh">
+        <di:waypoint x="120" y="177" />
+        <di:waypoint x="172" y="177" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

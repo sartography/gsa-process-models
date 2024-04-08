@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "properties": {
+  "order": {  
+    "type": "object",
+    "properties": {
+        "table_number": {
+        "type": "integer",
+        "description": "The table number of the order",
+        "minimum": 1
+        },
+        "drink": {
+        "type": "string",
+        "description": "The drink ordered"
+        },
+        "meal": {
+        "type": "string",
+        "description": "The meal ordered"
+        }
+      },
+     "required": [
+        "table_number"
+     ]
+    }
+}
+}

@@ -1,0 +1,4 @@
+{
+    "description": "Many workflow engines are finite state machines, which do not handle looping back to previous points. SpiffWorkflow can do this, and handles it very well.",
+    "display_name": "Loops and Multi-Instances"
+}

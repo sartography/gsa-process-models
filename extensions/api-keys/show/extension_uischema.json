@@ -1,0 +1,33 @@
+{
+  "version": "0.1",
+  "pages": {
+    "/api-keys:show": {
+      "header": "Api Key",
+      "on_load": {
+        "persistence_level": "none",
+        "api_path": "api-keys:show",
+        "results_markdown_filename": "load_results.md",
+        "process_id_to_run": "Process_ApiKeyShowLoad",
+        "search_params_to_inject": [
+          "name"
+        ]
+      },
+      "components": [
+        {
+          "name": "CustomForm",
+          "navigate_to_on_form_submit": "/extensions/api-keys",
+          "arguments": {
+            "schema": "SPIFF_PROCESS_MODEL_FILE:FROM_JSON:::api-keys-schema.json",
+            "uiSchema": "SPIFF_PROCESS_MODEL_FILE:FROM_JSON:::api-keys-uischema.json",
+            "submitButtonText": "Delete"
+          },
+          "on_form_submit": {
+            "api_path": "api-keys:show",
+            "process_id_to_run": "Process_ApiKeyShowSubmit"
+          }
+        }
+      ],
+      "open_links_in_new_tab": false
+    }
+  }
+}

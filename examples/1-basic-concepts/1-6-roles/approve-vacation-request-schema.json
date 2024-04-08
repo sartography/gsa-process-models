@@ -1,0 +1,19 @@
+{
+  "title": "Approve Vacation Request",
+  "description": "Please approve or decline this vacation request",
+  "properties": {
+    "approved": {
+      "type": "string",
+      "title": "Approved?",
+      "enum": [
+        "approved",
+        "rejected"
+      ]
+    },
+    "explanation": {
+      "type": "string",
+      "title": "Explanation"
+    }
+  },
+  "required": []
+}

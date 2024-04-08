@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="Definitions_76910d7" name="DRD" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="decision_1" name="Norris Score">
+    <decisionTable id="decisionTable_1">
+      <input id="input_1">
+        <inputExpression id="inputExpression_1" typeRef="boolean">
+          <text>pushups</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_11n2amy">
+        <inputExpression id="LiteralExpression_0hi8tp3" typeRef="boolean">
+          <text>thanos</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_14d48pg">
+        <inputExpression id="LiteralExpression_1w009aw" typeRef="boolean">
+          <text>bulletproof</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" name="score_message" typeRef="number" />
+      <rule id="DecisionRule_1xh76qk">
+        <description>Perfect Score.
+</description>
+        <inputEntry id="UnaryTests_0b7aoqb">
+          <text>True</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17u75b6">
+          <text>False</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0n2htkb">
+          <text>True</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0k7a6o4">
+          <text>'Pefect! You answered it all correctly.'</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0wwxvvz">
+        <description>This is the worst possible response, it is completely wrong.</description>
+        <inputEntry id="UnaryTests_1g34rye">
+          <text>False</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0i0bdmd">
+          <text>True</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1173czd">
+          <text>False</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ymss1m">
+          <text>'Terrible! This is as wrong as it is possible to be.'</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0weyu2j">
+        <description>At least one response was correct. </description>
+        <inputEntry id="UnaryTests_1clpgrf">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15m7zdv">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zo50lx">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1i53txe">
+          <text>'You are not perfect, but you understand a little about old Chuck.'</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_1cykosu">
+      <dmndi:DMNShape id="DMNShape_1dhfq2s" dmnElementRef="decision_1">
+        <dc:Bounds height="80" width="180" x="157" y="151" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

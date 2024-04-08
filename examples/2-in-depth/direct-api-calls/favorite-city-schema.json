@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "required": [
+    "favorite_city"
+  ],
+  "properties": {
+    "favorite_city": {
+      "type": "string",
+      "title": "Please enter the name of your favorite city"
+    }
+  }
+}

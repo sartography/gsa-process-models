@@ -1,0 +1,9 @@
+{
+    "description": "You can create diagrams within diagrams - reuse a diagrams between processes, share cool features to friends and colleagues! This process demonstrates how you can use subprocesses and call activities.",
+    "display_name": "Subprocesses and Call Activities",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "food-ordering-process.bpmn",
+    "primary_process_id": "Food_Ordering_Process"
+}

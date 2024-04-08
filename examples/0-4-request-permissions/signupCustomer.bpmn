@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:spiffworkflow="http://spiffworkflow.org/bpmn/schema/1.0/core" id="Definitions_96f6665" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-dev">
+  <bpmn:collaboration id="Collaboration_0m1omy3">
+    <bpmn:participant id="Participant_0e9zwln" processRef="Process_signupCustomer" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_signupCustomer" name="signupCustomer" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_1rtlpg3">
+      <bpmn:lane id="Lane_1h14pj9">
+        <bpmn:flowNodeRef>Event_1dzgfyn</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_12ze3hm</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1w57gd8</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_0c9ts6d" name="admin">
+        <bpmn:flowNodeRef>Activity_1pxm4b6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0joe8o3</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Event_1dzgfyn">
+      <bpmn:outgoing>Flow_1nohmyy</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Activity_12ze3hm" name="Notify Sartography">
+      <bpmn:extensionElements>
+        <spiffworkflow:serviceTaskOperator id="slack/PostMessage" resultVariable="slack_result">
+          <spiffworkflow:parameters>
+            <spiffworkflow:parameter id="channel" type="str" value="&#39;team&#39;" />
+            <spiffworkflow:parameter id="message" type="str" value="f&#39;New Demo Request!!!   Please visit the demo site at https://spiffdemo.org and look at tasks assigned to the Admin group. {full_name} at {organization} with role {role} and wanting to: {purpose}&#39;" />
+            <spiffworkflow:parameter id="token" type="str" value="&#39;secret:slack_token&#39;" />
+          </spiffworkflow:parameters>
+        </spiffworkflow:serviceTaskOperator>
+        <spiffworkflow:preScript>current_user = get_current_user()</spiffworkflow:preScript>
+        <spiffworkflow:instructionsForEndUser></spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_13pjly3</bpmn:incoming>
+      <bpmn:outgoing>Flow_0eg1ebo</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1nohmyy" sourceRef="Event_1dzgfyn" targetRef="Activity_1w57gd8" />
+    <bpmn:sequenceFlow id="Flow_13pjly3" sourceRef="Activity_1w57gd8" targetRef="Activity_12ze3hm" />
+    <bpmn:sequenceFlow id="Flow_0eg1ebo" sourceRef="Activity_12ze3hm" targetRef="Activity_1pxm4b6" />
+    <bpmn:userTask id="Activity_1w57gd8" name="Request Form">
+      <bpmn:extensionElements>
+        <spiffworkflow:properties>
+          <spiffworkflow:property name="formJsonSchemaFilename" value="request-a-playground-schema.json" />
+          <spiffworkflow:property name="formUiSchemaFilename" value="request-a-playground-uischema.json" />
+        </spiffworkflow:properties>
+        <spiffworkflow:instructionsForEndUser># Terms of Service
+
+By submitting this request you agree to be bound by our [Terms of Service Agreement](https://www.spiffworkflow.org/pages/demo_terms_of_service/).  Please understand:
+
+- This demo server is provided for evaluations purposes only.  
+- We reserve the right to remove any processes you create at any time and for any reason.
+
+# Please tell us a little about yourself
+Please complete the form below.  Your request will be sent off to our administrative team and we will get back in touch with you when we have created your account.</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1nohmyy</bpmn:incoming>
+      <bpmn:outgoing>Flow_13pjly3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1m0dgi9" sourceRef="Activity_1pxm4b6" targetRef="Event_0joe8o3" />
+    <bpmn:manualTask id="Activity_1pxm4b6" name="Setup Permissions and Notify Participant">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>## {{current_user.username}} requests a Playground
+
+* Full Name: {{full_name}}
+* Organization: {{organization}}
+* Title/Role: {{role}} 
+
+### Purpose:
+{{purpose}}
+
+
+## Instructions:
+We did not yet automate anything.  So please make sure you do all of the following:
+
+ [] Create a new Process Group on the Demo Server  
+ [] Update permissions so this person (and only this person) can see, execute, and otherwise manage the new process group.   
+ [] Notify this person that the process group is available for them to use.</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0eg1ebo</bpmn:incoming>
+      <bpmn:outgoing>Flow_1m0dgi9</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:endEvent id="Event_0joe8o3">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser># This request was completed.
+
+* User ID: {{current_user.username}}
+* Full Name: {{full_name}}
+* Organization: {{organization}}
+* Title/Role: {{role}} 
+
+### Purpose:
+{{purpose}}
+
+</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1m0dgi9</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:textAnnotation id="TextAnnotation_0z7s8uu">
+      <bpmn:text>Keeping this super simple for now, but in the future we will likely automate the creation of the playground, the updating of permissions, and notifying the requester.   As it stands, this provides good examples of how to make a service call to post a message to Slack, and how lanes can be used to assign tasks to specific people and groups.</bpmn:text>
+    </bpmn:textAnnotation>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0m1omy3">
+      <bpmndi:BPMNShape id="Participant_0e9zwln_di" bpmnElement="Participant_0e9zwln" isHorizontal="true">
+        <dc:Bounds x="160" y="210" width="650" height="310" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0c9ts6d_di" bpmnElement="Lane_0c9ts6d" isHorizontal="true">
+        <dc:Bounds x="190" y="360" width="620" height="160" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1h14pj9_di" bpmnElement="Lane_1h14pj9" isHorizontal="true">
+        <dc:Bounds x="190" y="210" width="620" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1dzgfyn_di" bpmnElement="Event_1dzgfyn">
+        <dc:Bounds x="262" y="257" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_198r38z_di" bpmnElement="Activity_12ze3hm">
+        <dc:Bounds x="510" y="235" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1mlx59p_di" bpmnElement="Activity_1w57gd8">
+        <dc:Bounds x="350" y="235" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0dpkpuq_di" bpmnElement="Activity_1pxm4b6">
+        <dc:Bounds x="610" y="415" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0joe8o3_di" bpmnElement="Event_0joe8o3">
+        <dc:Bounds x="742" y="437" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0z7s8uu_di" bpmnElement="TextAnnotation_0z7s8uu">
+        <dc:Bounds x="300" y="370" width="276" height="125" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1nohmyy_di" bpmnElement="Flow_1nohmyy">
+        <di:waypoint x="298" y="275" />
+        <di:waypoint x="350" y="275" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13pjly3_di" bpmnElement="Flow_13pjly3">
+        <di:waypoint x="450" y="275" />
+        <di:waypoint x="510" y="275" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0eg1ebo_di" bpmnElement="Flow_0eg1ebo">
+        <di:waypoint x="610" y="275" />
+        <di:waypoint x="660" y="275" />
+        <di:waypoint x="660" y="415" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1m0dgi9_di" bpmnElement="Flow_1m0dgi9">
+        <di:waypoint x="710" y="455" />
+        <di:waypoint x="742" y="455" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

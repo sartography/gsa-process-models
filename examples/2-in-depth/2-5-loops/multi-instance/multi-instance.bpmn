@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:spiffworkflow="http://spiffworkflow.org/bpmn/schema/1.0/core" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_96f6665" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-dev">
+  <bpmn:process id="Process_multi_instance_f7w10zo" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_17db3yp</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_17db3yp" sourceRef="StartEvent_1" targetRef="Activity_0qpzdpu" />
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>The process instance completed successfully.</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1uwondc</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_12pkbxb" sourceRef="Activity_0qpzdpu" targetRef="Activity_0h4w26t" />
+    <bpmn:sequenceFlow id="Flow_1y9syi8" sourceRef="Activity_0h4w26t" targetRef="Activity_0y9m172" />
+    <bpmn:scriptTask id="Activity_0qpzdpu" name="Create Dictionary">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_17db3yp</bpmn:incoming>
+      <bpmn:outgoing>Flow_12pkbxb</bpmn:outgoing>
+      <bpmn:script>composers = [
+  {
+    "composer": "Johann Sebastian Bach",
+    "genre": "Baroque"
+  },
+  {
+    "composer": "Ludwig van Beethoven",
+    "genre": "Classical/Romantic"
+  },
+  {
+    "composer": "Wolfgang Amadeus Mozart",
+    "genre": "Classical"
+  }
+]
+
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:userTask id="Activity_0h4w26t" name="Edit Composer">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser />
+        <spiffworkflow:properties>
+          <spiffworkflow:property name="formJsonSchemaFilename" value="composer-schema.json" />
+          <spiffworkflow:property name="formUiSchemaFilename" value="composer-uischema.json" />
+        </spiffworkflow:properties>
+        <spiffworkflow:preScript />
+        <spiffworkflow:postScript />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_12pkbxb</bpmn:incoming>
+      <bpmn:outgoing>Flow_1y9syi8</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true" spiffworkflow:scriptsOnInstances="true">
+        <bpmn:loopDataInputRef>composers</bpmn:loopDataInputRef>
+        <bpmn:loopDataOutputRef>composers</bpmn:loopDataOutputRef>
+        <bpmn:inputDataItem id="c" name="c" />
+        <bpmn:outputDataItem id="c" name="c" />
+        <bpmn:completionCondition xsi:type="bpmn:tFormalExpression" />
+      </bpmn:multiInstanceLoopCharacteristics>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1uwondc" sourceRef="Activity_0y9m172" targetRef="EndEvent_1" />
+    <bpmn:manualTask id="Activity_0y9m172" name="Display Edited Composers">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>{% for c in composers %}
+* **{{c.composer}}**:   {{c.genre }}
+{% endfor %}</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1y9syi8</bpmn:incoming>
+      <bpmn:outgoing>Flow_1uwondc</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:dataObjectReference id="DataObjectReference_0j9m0n3" dataObjectRef="DataObject_19melwa" />
+    <bpmn:dataObject id="DataObject_19melwa" name="Data Object 19 Melwa" />
+    <bpmn:textAnnotation id="TextAnnotation_0jeegiq">
+      <bpmn:text>This sequential multi-instance task will iterate over the array of composers, allowing you to edit each item in the array.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0zu0sch" sourceRef="Activity_0h4w26t" targetRef="TextAnnotation_0jeegiq" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_multi_instance_f7w10zo">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="142" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_14za570_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="722" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0mx090y_di" bpmnElement="Activity_0qpzdpu">
+        <dc:Bounds x="250" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0j8tciw_di" bpmnElement="Activity_0h4w26t">
+        <dc:Bounds x="400" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0dklx73_di" bpmnElement="Activity_0y9m172">
+        <dc:Bounds x="560" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0jeegiq_di" bpmnElement="TextAnnotation_0jeegiq">
+        <dc:Bounds x="440" y="10" width="228" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_17db3yp_di" bpmnElement="Flow_17db3yp">
+        <di:waypoint x="178" y="177" />
+        <di:waypoint x="250" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12pkbxb_di" bpmnElement="Flow_12pkbxb">
+        <di:waypoint x="350" y="177" />
+        <di:waypoint x="400" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1y9syi8_di" bpmnElement="Flow_1y9syi8">
+        <di:waypoint x="500" y="177" />
+        <di:waypoint x="560" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1uwondc_di" bpmnElement="Flow_1uwondc">
+        <di:waypoint x="660" y="177" />
+        <di:waypoint x="722" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0zu0sch_di" bpmnElement="Association_0zu0sch">
+        <di:waypoint x="461" y="137" />
+        <di:waypoint x="475" y="80" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

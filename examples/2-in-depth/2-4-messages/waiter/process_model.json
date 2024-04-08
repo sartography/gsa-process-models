@@ -1,0 +1,9 @@
+{
+    "description": "The waiter starts the message process.  It takes an order and then passes off a message that can be picked up by any Chef (the other workflow process)  Then the Chef completes the task, it says a message back that correlates to the correct waiter, letting that waiter know the order is ready.",
+    "display_name": "Waiter",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "simple-message-waiter.bpmn",
+    "primary_process_id": "Process_k6u417e"
+}

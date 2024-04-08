@@ -1,0 +1,7 @@
+{
+  "ui:order": [
+    "location",
+    "season",
+    "activites"
+  ]
+}

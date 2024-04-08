@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:spiffworkflow="http://spiffworkflow.org/bpmn/schema/1.0/core" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_96f6665" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-dev">
+  <bpmn:process id="Process_bd2e724" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_12id8ez</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_12id8ez" sourceRef="StartEvent_1" targetRef="Activity_04csdr0" />
+    <bpmn:scriptTask id="Activity_06mbkcn" name="Modifying Data in a Script">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>We are calculating your score ...</spiffworkflow:instructionsForEndUser>
+        <spiffworkflow:unitTests>
+          <spiffworkflow:unitTest id="validate_script">
+            <spiffworkflow:inputJson>{
+  "flag_stars": "12",
+  "longest": "nile",
+  "woman_nobel": "curie"
+}</spiffworkflow:inputJson>
+            <spiffworkflow:expectedOutputJson>{
+  "flag_stars": "12",
+  "longest": "nile",
+  "num_correct": 3,
+  "score": 100,
+  "woman_nobel": "curie"
+}</spiffworkflow:expectedOutputJson>
+          </spiffworkflow:unitTest>
+        </spiffworkflow:unitTests>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_00mc2nm</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ykl7il</bpmn:outgoing>
+      <bpmn:script># Intentinally slow this down so we can see the message 
+# go by when we run this process.
+time.sleep(2)
+
+# We collected three variables in the form, that we now 
+# need to use to calculate a score.
+num_correct = 0
+
+
+if flag_stars == 12:
+    num_correct += 1
+
+if "nile" in longest_river.lower():
+    num_correct += 1
+
+if "curie" in woman_nobel.lower():
+    num_correct += 1
+
+score = int(num_correct / 3 * 100)
+
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_1ykl7il" sourceRef="Activity_06mbkcn" targetRef="Activity_1p3gjo2" />
+    <bpmn:endEvent id="Event_0tdnvqi">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>Scripts are a way to inject short bits of python code into your process to modify data.  They can be extremely useful.   
+
+Because scripts can be easily mis-used, your SpiffWorkflow environment can be configured to run scripts within a Restricted Python context or even execute the scripts in a seperate environment.   In these cases you can't import additional libraries or modules.  But that is ok.  If you need to do more complex programming tasks then take a look at **Service Tasks** which allow you to call out to other independent applications through APIs.
+ 
+### Get Involved!
+Please get in touch with us!  We would love to help you build custom scripts into your workflows.  There is no end to what we can accomplish if we work together.  Please reach out to Dan at [dan@sartography.com](mailto:dan@sartography.com) to get started.</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1qoq1t3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1qoq1t3" sourceRef="Activity_1p3gjo2" targetRef="Event_0tdnvqi" />
+    <bpmn:sequenceFlow id="Flow_00mc2nm" sourceRef="Activity_04csdr0" targetRef="Activity_06mbkcn" />
+    <bpmn:userTask id="Activity_04csdr0" name="Form">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>Complete the quiz below and we will use the information you enter in some follow up script tasks.</spiffworkflow:instructionsForEndUser>
+        <spiffworkflow:properties>
+          <spiffworkflow:property name="formJsonSchemaFilename" value="trivia-quiz-schema.json" />
+          <spiffworkflow:property name="formUiSchemaFilename" value="trivia-quiz-uischema.json" />
+        </spiffworkflow:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_12id8ez</bpmn:incoming>
+      <bpmn:outgoing>Flow_00mc2nm</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:manualTask id="Activity_1p3gjo2" name="Results and Pre and Post Scripts">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser># You scored {{score}}%
+
+The score was calculated in a script task using a bit of the beautiful Python syntax, as shown below ...
+
+``` python
+if flag_stars.lower().strip() == "twelve":
+    num_correct += 1
+elif int(flag_stars) == 12:
+    num_correct += 1
+
+if "nile" in longest.lower():
+    num_correct += 1
+
+if "curie" in woman_nobel.lower():
+    num_correct += 1
+
+score = int(num_correct / 3 * 100)
+```
+
+### Pre Scripts
+While you can have tasks that are dedicated scripts, it can become a bit noisy, and we want our diagrams to convey a clear sense of the business logic and rules.  For this reason it is also possible to add scripts to all Task types - using Pre and Post Scripts.   This manual task contains a pre-script that also calculated PI using the Leibniz’s formula.  The value is ...
+
+**{{pi}}**
+
+### Post Scripts
+These are also available on most task types, but they execute AFTER the task is completed.  These are great for user forms where you want to modify and clean up the form results before moving on to the next task.</spiffworkflow:instructionsForEndUser>
+        <spiffworkflow:preScript># Initialize denominator
+k = 1
+ 
+# Initialize sum
+s = 0
+ 
+for i in range(1000000):
+ 
+    # even index elements are positive
+    if i % 2 == 0:
+        s += 4/k
+    else:
+ 
+        # odd index elements are negative
+        s -= 4/k
+ 
+    # denominator is odd
+    k += 2
+     
+pi = s
+del(k)</spiffworkflow:preScript>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1ykl7il</bpmn:incoming>
+      <bpmn:outgoing>Flow_1qoq1t3</bpmn:outgoing>
+    </bpmn:manualTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_bd2e724">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="-98" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_196ijhw_di" bpmnElement="Activity_06mbkcn">
+        <dc:Bounds x="150" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0tdnvqi_di" bpmnElement="Event_0tdnvqi">
+        <dc:Bounds x="462" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_123u8c4_di" bpmnElement="Activity_04csdr0">
+        <dc:Bounds x="0" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0c9qga9_di" bpmnElement="Activity_1p3gjo2">
+        <dc:Bounds x="300" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_12id8ez_di" bpmnElement="Flow_12id8ez">
+        <di:waypoint x="-62" y="177" />
+        <di:waypoint x="0" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ykl7il_di" bpmnElement="Flow_1ykl7il">
+        <di:waypoint x="250" y="177" />
+        <di:waypoint x="300" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1qoq1t3_di" bpmnElement="Flow_1qoq1t3">
+        <di:waypoint x="400" y="177" />
+        <di:waypoint x="462" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00mc2nm_di" bpmnElement="Flow_00mc2nm">
+        <di:waypoint x="100" y="177" />
+        <di:waypoint x="150" y="177" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

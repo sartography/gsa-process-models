@@ -1,0 +1,4 @@
+{
+    "description": "Processes can communicate with each other through messages.  Messages also offer a way for external applications to make API calls into SpiffWorkflow.   IMPORTANT:  Start with the Waiter!  ",
+    "display_name": "Messages"
+}

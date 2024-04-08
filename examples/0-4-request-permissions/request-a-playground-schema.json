@@ -1,0 +1,23 @@
+{
+  "title": "Request a Playground",
+  "description": "Request a personal workspace where you can build and execute your own diagrams.",
+  "properties": {
+    "full_name": {
+      "type": "string",
+      "title": "Full Name"
+    },
+    "organization": {
+      "type": "string",
+      "title": "Organization"
+    },
+    "role": {
+      "type": "string",
+      "title": "Role / Job Title"
+    },
+    "purpose": {
+      "type": "string",
+      "title": "Tell us a little about your goals in evaluating SpiffWorkflow"
+    }
+  },
+  "required": ["full_name", "organization", "role", "purpose"]
+}

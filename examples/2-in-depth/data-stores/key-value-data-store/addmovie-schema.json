@@ -1,0 +1,27 @@
+
+{
+    "type": "array",
+    "description": "List of characters in the movie",
+    "items": {
+        "type": "object",
+        "properties": {
+        "name": {
+            "type": "string",
+            "description": "Name of the character"
+        },
+        "actor": {
+            "type": "string",
+            "description": "Actor who portrays the character"
+        },
+        "description": {
+            "type": "string",
+            "description": "Brief description of the character"
+        }
+        },
+        "required": [
+        "name",
+        "actor",
+        "description"
+        ]
+    }
+}

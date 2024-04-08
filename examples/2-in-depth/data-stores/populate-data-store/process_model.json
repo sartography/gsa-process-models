@@ -1,0 +1,9 @@
+{
+    "description": "How to view and edit a basic Json Data Store",
+    "display_name": "Simple Json Data Store",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "populate-data-store.bpmn",
+    "primary_process_id": "Process_populate_data_store_9nyy6hu"
+}

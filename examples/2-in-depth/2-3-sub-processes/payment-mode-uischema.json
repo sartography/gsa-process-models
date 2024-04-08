@@ -1,0 +1,6 @@
+{
+  "ui:order": [
+    "pay_on_delivery",
+    "pay_online"
+  ]
+}

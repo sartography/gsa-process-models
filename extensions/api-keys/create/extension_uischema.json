@@ -1,0 +1,37 @@
+{
+  "version": "0.1",
+  "ux_elements": [
+    {
+      "label": "Api keys",
+      "page": "/api-keys",
+      "display_location": "user_profile_item"
+    }
+  ],
+  "pages": {
+    "/api-keys": {
+      "header": "Api Keys",
+      "on_load": {
+        "persistence_level": "none",
+        "api_path": "api-keys:create",
+        "results_markdown_filename": "load_results.md",
+        "process_id_to_run": "Process_ApiKeyCreateLoad"
+      },
+      "components": [
+        {
+          "name": "CustomForm",
+          "arguments": {
+            "schema": "SPIFF_PROCESS_MODEL_FILE:FROM_JSON:::api-keys-schema.json",
+            "uiSchema": "SPIFF_PROCESS_MODEL_FILE:FROM_JSON:::api-keys-uischema.json"
+          },
+          "on_form_submit": {
+            "persistence_level": "none",
+            "api_path": "api-keys:create",
+            "results_markdown_filename": "submission_results.md",
+            "process_id_to_run": "Process_ApiKeyCreateSubmit"
+          }
+        }
+      ],
+      "open_links_in_new_tab": false
+    }
+  }
+}

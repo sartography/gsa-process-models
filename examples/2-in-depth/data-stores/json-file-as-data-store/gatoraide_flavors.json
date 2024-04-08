@@ -1,0 +1,52 @@
+[
+    {
+      "name": "Glacier Freeze",
+      "color": "#C0C0C0",
+      "description": "Icy, refreshing citrus flavor"
+    },
+    {
+      "name": "Fierce Grape",
+      "color": "#AA77CC",
+      "description": "Bold and intense grape flavor"
+    },
+      {
+      "name": "Fruit Punch",
+      "color": "#FF0000",
+      "description": "Classic blend of fruit flavors"
+    },
+    {
+      "name": "Lemon-Lime",
+      "color": "#FFFF00",
+      "description": "Tangy and zesty lemon and lime mix"
+    },
+    {
+      "name": "Orange",
+      "color": "#FFA500",
+      "description": "Bright and juicy orange flavor"
+    },
+    {
+      "name": "Riptide Rush",
+      "color": "#8DFF00",
+      "description": "Tropical blend of pineapple and coconut flavors"
+    },
+    {
+      "name": "Strawberry Lemonade",
+      "color": "#FFC0CB",
+      "description": "Sweet and tart strawberry and lemonade mix"
+    },
+    {
+      "name": "Sweat Strawberry",
+      "color": "#F08080",
+      "description": "Sweet and juicy strawberry flavor with a kick"
+    },
+    {
+      "name": "Tropical Punch",
+      "color": "#FF7F50",
+      "description": "Exotic blend of tropical fruit flavors"
+    },
+    {
+      "name": "X-Fruit Fusion",
+      "color": "#D0DBFF",
+      "description": "Mystery blend of multiple fruit flavors"
+    }
+]

@@ -1,0 +1,9 @@
+{
+    "description": "Lanes (think Swim Lanes) are how BPMN describes the coordination of efforts between multiple people. ",
+    "display_name": "Assign Tasks (Lanes)",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "my_vacation.bpmn",
+    "primary_process_id": "Process_9wllce2"
+}

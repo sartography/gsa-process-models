@@ -1,0 +1,7 @@
+{
+    "todoList": {
+        "items": {
+            "ui:order": ["todoTitle", "isComplete"]
+        }
+    }
+}

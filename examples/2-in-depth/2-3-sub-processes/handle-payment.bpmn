@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:spiffworkflow="http://spiffworkflow.org/bpmn/schema/1.0/core" id="Definitions_96f6665" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-dev">
+  <bpmn:process id="Handle_Payment" name="Handle Payment" isExecutable="true">
+    <bpmn:ioSpecification>
+      <bpmn:dataInput id="cost" name="cost" />
+      <bpmn:dataOutput id="success" name="success" />
+      <bpmn:inputSet>
+        <bpmn:dataInputRefs>cost</bpmn:dataInputRefs>
+      </bpmn:inputSet>
+      <bpmn:outputSet>
+        <bpmn:dataOutputRefs>success</bpmn:dataOutputRefs>
+      </bpmn:outputSet>
+    </bpmn:ioSpecification>
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0ifm5t8</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0ifm5t8" sourceRef="StartEvent_1" targetRef="Activity_1hsjbbi" />
+    <bpmn:exclusiveGateway id="Gateway_1u659zq" name="payment method">
+      <bpmn:incoming>Flow_1badwwt</bpmn:incoming>
+      <bpmn:outgoing>Flow_0j6qnak</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1e7wa3o</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1badwwt" sourceRef="Activity_1hsjbbi" targetRef="Gateway_1u659zq" />
+    <bpmn:sequenceFlow id="Flow_0j6qnak" name="pay_on_delivery" sourceRef="Gateway_1u659zq" targetRef="Activity_1qwbmco">
+      <bpmn:conditionExpression>pay_on_delivery</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1e7wa3o" name="pay_online" sourceRef="Gateway_1u659zq" targetRef="Activity_11ph807">
+      <bpmn:conditionExpression>pay_online</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_1xz13hd">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1sfht9h</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1sfht9h" sourceRef="Activity_1qwbmco" targetRef="Event_1xz13hd" />
+    <bpmn:endEvent id="Event_0ntjvax">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_196jf65</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_196jf65" sourceRef="Activity_11ph807" targetRef="Event_0ntjvax" />
+    <bpmn:manualTask id="Activity_1qwbmco" name="Pay on Delivery">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>You can pay by Cash or Credit Card when the order is delivered.
+
+After this activity you'll be taken back to the main process.</spiffworkflow:instructionsForEndUser>
+        <spiffworkflow:postScript>success = True</spiffworkflow:postScript>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0j6qnak</bpmn:incoming>
+      <bpmn:outgoing>Flow_1sfht9h</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:userTask id="Activity_1hsjbbi" name="Select Payment Method">
+      <bpmn:extensionElements>
+        <spiffworkflow:properties>
+          <spiffworkflow:property name="formUiSchemaFilename" value="payment-mode-uischema.json" />
+          <spiffworkflow:property name="formJsonSchemaFilename" value="payment-mode-schema.json" />
+        </spiffworkflow:properties>
+        <spiffworkflow:instructionsForEndUser>Now you are inside the 'Handle Payment' call activity.
+This is an independent process model and can be called as part of any process.
+This process model is created to handle payment.
+
+&gt; Click on the "Process Instance Id: ##" in the breadcrumbs at the top of the page to go to the Process Instance page. There click on the 'Food Ordering Process' to view the files related to this process.
+There you will see two .bpmn files
+&gt; 1. food-ordering-process.bpmn - this is the BPMN file of the main process.
+&gt; 2. handle-payment.bpmn - this is the BMPN file which is called from the 'Handle Payment' call activity
+
+&gt; NOTE:  The reusable process model file that you are calling from a call activity need not be placed inside the main process model. They can reside in a separate model (like a library) and it can be accessed from multiple process models.
+
+
+&gt; In the BPMN editor, inorder to access the call activity model from the main model, click on the 'Handle Payment' call activity. Then in the properties panel on the right hand side click on the 'Called Element' property. Then you will see 'Handle_Payment' as the Process Id there. Click on the 'Launch Editor' and it'll open the handle-payment.bpmn in a new tab.
+
+First, we select whether the user wants to pay online or pay when the order is delivered.
+</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0ifm5t8</bpmn:incoming>
+      <bpmn:outgoing>Flow_1badwwt</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_11ph807" name="Enter your Card Information">
+      <bpmn:extensionElements>
+        <spiffworkflow:properties>
+          <spiffworkflow:property name="formUiSchemaFilename" value="enter-dummy-card-number-uischema.json" />
+          <spiffworkflow:property name="formJsonSchemaFilename" value="enter-dummy-card-number-schema.json" />
+        </spiffworkflow:properties>
+        <spiffworkflow:instructionsForEndUser>After this activity you'll be taken back to the main process.</spiffworkflow:instructionsForEndUser>
+        <spiffworkflow:postScript>success = True</spiffworkflow:postScript>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1e7wa3o</bpmn:incoming>
+      <bpmn:outgoing>Flow_196jf65</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Handle_Payment">
+      <bpmndi:BPMNShape id="DataOutput-623753916-1DI" bpmnElement="success">
+        <dc:Bounds x="592" y="-35" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="590" y="22" width="41" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="12" y="92" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1u659zq_di" bpmnElement="Gateway_1u659zq" isMarkerVisible="true">
+        <dc:Bounds x="255" y="85" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="239" y="55" width="82" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1xz13hd_di" bpmnElement="Event_1xz13hd">
+        <dc:Bounds x="592" y="92" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ntjvax_di" bpmnElement="Event_0ntjvax">
+        <dc:Bounds x="592" y="202" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00nt5i6_di" bpmnElement="Activity_1qwbmco">
+        <dc:Bounds x="420" y="70" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1eq4m2i_di" bpmnElement="Activity_1hsjbbi">
+        <dc:Bounds x="100" y="70" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ai9w8p_di" bpmnElement="Activity_11ph807">
+        <dc:Bounds x="420" y="180" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataInput-956220638-1DI" bpmnElement="cost">
+        <dc:Bounds x="12" y="-35" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="20" y="22" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0ifm5t8_di" bpmnElement="Flow_0ifm5t8">
+        <di:waypoint x="48" y="110" />
+        <di:waypoint x="100" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1badwwt_di" bpmnElement="Flow_1badwwt">
+        <di:waypoint x="200" y="110" />
+        <di:waypoint x="255" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j6qnak_di" bpmnElement="Flow_0j6qnak">
+        <di:waypoint x="305" y="110" />
+        <di:waypoint x="420" y="110" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="323" y="92" width="81" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1e7wa3o_di" bpmnElement="Flow_1e7wa3o">
+        <di:waypoint x="280" y="135" />
+        <di:waypoint x="280" y="220" />
+        <di:waypoint x="420" y="220" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="337" y="203" width="54" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1sfht9h_di" bpmnElement="Flow_1sfht9h">
+        <di:waypoint x="520" y="110" />
+        <di:waypoint x="592" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_196jf65_di" bpmnElement="Flow_196jf65">
+        <di:waypoint x="520" y="220" />
+        <di:waypoint x="592" y="220" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

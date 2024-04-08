@@ -1,0 +1,9 @@
+{
+    "description": "A more complete BPMN Model that introduces a number of core concepts working together.",
+    "display_name": "Essentials Example ",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "user-guide-basics.bpmn",
+    "primary_process_id": "Proccess_rlm9uj3"
+}

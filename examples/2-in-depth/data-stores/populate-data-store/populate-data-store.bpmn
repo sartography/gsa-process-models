@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:spiffworkflow="http://spiffworkflow.org/bpmn/schema/1.0/core" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_96f6665" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-dev">
+  <bpmn:process id="Process_populate_data_store_9nyy6hu" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_17db3yp</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_17db3yp" sourceRef="StartEvent_1" targetRef="Activity_0qpzdpu" />
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>The process instance completed successfully.</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1hb6m9c</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_12pkbxb" sourceRef="Activity_0qpzdpu" targetRef="Activity_09c6nko" />
+    <bpmn:scriptTask id="Activity_0qpzdpu" name="Populate Data Store">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>This is an example **Manual Task**. A **Manual Task** is designed to allow someone to complete a task outside of the system and then report back that it is complete. You can click the *Continue* button to proceed. When you are done running this process, you can edit the **Process Model** to include a:
+
+ * **Script Task** - write a short snippet of python code to update some data
+ *  **User Task** - generate a form that collects information from a user
+ * **Service Task** - communicate with an external API to fetch or update some data.
+
+You can also change the text you are reading here by updating the *Instructions* on this example manual task.</spiffworkflow:instructionsForEndUser>
+        <spiffworkflow:unitTests>
+          <spiffworkflow:unitTest id="ScriptUnitTest_00lbk5r">
+            <spiffworkflow:inputJson>{}</spiffworkflow:inputJson>
+            <spiffworkflow:expectedOutputJson>{
+    "german_philosophers":[
+ {
+    "philosopher": "Immanuel Kant",
+    "works": [
+      "Critique of Pure Reason",
+      "Critique of Practical Reason",
+      "Critique of Judgment",
+      "Groundwork of the Metaphysics of Morals"
+    ]
+  },
+  {
+    "philosopher": "Georg Wilhelm Friedrich Hegel",
+    "works": [
+      "Phenomenology of Spirit",
+      "Science of Logic",
+      "Philosophy of Right"
+    ]
+  },
+  {
+    "philosopher": "Friedrich Nietzsche",
+    "works": [
+      "Thus Spoke Zarathustra",
+      "Beyond Good and Evil",
+      "The Genealogy of Morality"
+    ]
+  },
+  {
+    "philosopher": "Martin Heidegger",
+    "works": [
+      "Being and Time",
+      "Introduction to Metaphysics",
+      "What is Called Thinking?"
+    ]
+  },
+  {
+    "philosopher": "Jürgen Habermas",
+    "works": [
+      "The Theory of Communicative Action",
+      "The Structure-Transformation of the Public Sphere",
+      "Justification and Application"
+    ]
+  },
+  {
+    "philosopher": "Gottfried Wilhelm Leibniz",
+    "works": [
+      "Discourse on Metaphysics",
+      "Monadology",
+      "Theodicy"
+    ]
+  },
+  {
+    "philosopher": "Arthur Schopenhauer",
+    "works": [
+      "The World as Will and Representation",
+      "Consolations of Philosophy",
+      "Essays and Aphorisms"
+    ]
+  },
+  {
+    "philosopher": "Hannah Arendt",
+    "works": [
+      "The Origins of Totalitarianism",
+      "The Human Condition",
+      "Eichmann in Jerusalem"
+    ]
+  },
+  {
+    "philosopher": "Johann Gottlieb Fichte",
+    "works": [
+      "The Science of Knowledge",
+      "Foundations of the Entire Science of Knowledge",
+      "Addresses to the German Nation"
+    ]
+  },
+  {
+    "philosopher": "Friedrich Schelling",
+    "works": [
+      "Ideas for a Philosophy of Nature",
+      "System of Idealism of Fichte and Schelling",
+      "The Ages of the World"
+    ]
+  }
+]}
+</spiffworkflow:expectedOutputJson>
+          </spiffworkflow:unitTest>
+        </spiffworkflow:unitTests>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_17db3yp</bpmn:incoming>
+      <bpmn:outgoing>Flow_12pkbxb</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_19zlb7d">
+        <bpmn:targetRef>DataStoreReference_1yx3y4c</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:script>german_philosophers = [
+  {
+    "philosopher": "Immanuel Kant",
+    "works": [
+      "Critique of Pure Reason",
+      "Critique of Practical Reason",
+      "Critique of Judgment",
+      "Groundwork of the Metaphysics of Morals"
+    ]
+  },
+  {
+    "philosopher": "Georg Wilhelm Friedrich Hegel",
+    "works": [
+      "Phenomenology of Spirit",
+      "Science of Logic",
+      "Philosophy of Right"
+    ]
+  },
+  {
+    "philosopher": "Friedrich Nietzsche",
+    "works": [
+      "Thus Spoke Zarathustra",
+      "Beyond Good and Evil",
+      "The Genealogy of Morality"
+    ]
+  },
+  {
+    "philosopher": "Martin Heidegger",
+    "works": [
+      "Being and Time",
+      "Introduction to Metaphysics",
+      "What is Called Thinking?"
+    ]
+  },
+  {
+    "philosopher": "Jürgen Habermas",
+    "works": [
+      "The Theory of Communicative Action",
+      "The Structure-Transformation of the Public Sphere",
+      "Justification and Application"
+    ]
+  },
+  {
+    "philosopher": "Gottfried Wilhelm Leibniz",
+    "works": [
+      "Discourse on Metaphysics",
+      "Monadology",
+      "Theodicy"
+    ]
+  },
+  {
+    "philosopher": "Arthur Schopenhauer",
+    "works": [
+      "The World as Will and Representation",
+      "Consolations of Philosophy",
+      "Essays and Aphorisms"
+    ]
+  },
+  {
+    "philosopher": "Hannah Arendt",
+    "works": [
+      "The Origins of Totalitarianism",
+      "The Human Condition",
+      "Eichmann in Jerusalem"
+    ]
+  },
+  {
+    "philosopher": "Johann Gottlieb Fichte",
+    "works": [
+      "The Science of Knowledge",
+      "Foundations of the Entire Science of Knowledge",
+      "Addresses to the German Nation"
+    ]
+  },
+  {
+    "philosopher": "Friedrich Schelling",
+    "works": [
+      "Ideas for a Philosophy of Nature",
+      "System of Idealism of Fichte and Schelling",
+      "The Ages of the World"
+    ]
+  }
+]
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:dataStoreReference id="DataStoreReference_1yx3y4c" name="Data Store (german_philosophers)" dataStoreRef="german_philosophers" />
+    <bpmn:sequenceFlow id="Flow_0dz9zf6" sourceRef="Activity_09c6nko" targetRef="Activity_02wo1je" />
+    <bpmn:sequenceFlow id="Flow_184azfl" sourceRef="Activity_02wo1je" targetRef="Activity_0ydla3d" />
+    <bpmn:manualTask id="Activity_02wo1je" name="Show Data Store">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>| Philosopher | Major Works |
+|---|---|
+{% for p in german_philosophers -%}
+| {{p.philosopher}} | {{ p.works | join(", ") }}  |
+{% endfor -%}
+</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0dz9zf6</bpmn:incoming>
+      <bpmn:outgoing>Flow_184azfl</bpmn:outgoing>
+      <bpmn:property id="Property_078wrm1" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_02zpmgt">
+        <bpmn:sourceRef>DataStoreReference_1yx3y4c</bpmn:sourceRef>
+        <bpmn:targetRef>Property_078wrm1</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:manualTask>
+    <bpmn:sequenceFlow id="Flow_1hb6m9c" sourceRef="Activity_0ydla3d" targetRef="EndEvent_1" />
+    <bpmn:scriptTask id="Activity_09c6nko" name="No-Op">
+      <bpmn:incoming>Flow_12pkbxb</bpmn:incoming>
+      <bpmn:outgoing>Flow_0dz9zf6</bpmn:outgoing>
+      <bpmn:script>my_regular_variable_1 = True</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_0ydla3d" name="No-Op2">
+      <bpmn:incoming>Flow_184azfl</bpmn:incoming>
+      <bpmn:outgoing>Flow_1hb6m9c</bpmn:outgoing>
+      <bpmn:script>my_regular_variable_2 = True</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:textAnnotation id="TextAnnotation_0kqbgms">
+      <bpmn:text>This script task assigns a local variable with the same name as the data store. This in combination with arrow pointing into the store, will cause the information to be written.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_12oy6mf" sourceRef="Activity_0qpzdpu" targetRef="TextAnnotation_0kqbgms" />
+    <bpmn:textAnnotation id="TextAnnotation_0duh4ez">
+      <bpmn:text>These Script do not do anything, but if you view a completed process instance diagram, you will see they do not have access to the data store.  There is no "german_philosophers" variable.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1xmxoqo" sourceRef="Activity_09c6nko" targetRef="TextAnnotation_0duh4ez" />
+    <bpmn:textAnnotation id="TextAnnotation_1kw6rar">
+      <bpmn:text>This will display the data store by referencing a local variable with same name as the data store "german_philosophers"</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_12kr3qt" sourceRef="Activity_02wo1je" targetRef="TextAnnotation_1kw6rar" />
+    <bpmn:association id="Association_0ther5z" sourceRef="TextAnnotation_0duh4ez" targetRef="Activity_0ydla3d" />
+  </bpmn:process>
+  <bpmn:dataStore id="german_philosophers" name="JSONDataStore" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_populate_data_store_9nyy6hu">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_14za570_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="882" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1e6hw1x_di" bpmnElement="Activity_0qpzdpu">
+        <dc:Bounds x="270" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_1yx3y4c_di" bpmnElement="DataStoreReference_1yx3y4c">
+        <dc:Bounds x="455" y="5" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="436" y="-45" width="88" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0hqeq0u_di" bpmnElement="Activity_02wo1je">
+        <dc:Bounds x="590" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1rb5ebd_di" bpmnElement="Activity_09c6nko">
+        <dc:Bounds x="430" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0veaueg_di" bpmnElement="Activity_0ydla3d">
+        <dc:Bounds x="730" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0kqbgms_di" bpmnElement="TextAnnotation_0kqbgms">
+        <dc:Bounds x="160" y="-20" width="230" height="84" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0duh4ez_di" bpmnElement="TextAnnotation_0duh4ez">
+        <dc:Bounds x="540" y="290" width="280" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1kw6rar_di" bpmnElement="TextAnnotation_1kw6rar">
+        <dc:Bounds x="690" y="10" width="230" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_17db3yp_di" bpmnElement="Flow_17db3yp">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="270" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12pkbxb_di" bpmnElement="Flow_12pkbxb">
+        <di:waypoint x="370" y="177" />
+        <di:waypoint x="430" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_19zlb7d_di" bpmnElement="DataOutputAssociation_19zlb7d">
+        <di:waypoint x="362" y="137" />
+        <di:waypoint x="455" y="49" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dz9zf6_di" bpmnElement="Flow_0dz9zf6">
+        <di:waypoint x="530" y="177" />
+        <di:waypoint x="590" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_184azfl_di" bpmnElement="Flow_184azfl">
+        <di:waypoint x="690" y="177" />
+        <di:waypoint x="730" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_02zpmgt_di" bpmnElement="DataInputAssociation_02zpmgt">
+        <di:waypoint x="505" y="53" />
+        <di:waypoint x="597" y="138" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1hb6m9c_di" bpmnElement="Flow_1hb6m9c">
+        <di:waypoint x="830" y="177" />
+        <di:waypoint x="882" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_12oy6mf_di" bpmnElement="Association_12oy6mf">
+        <di:waypoint x="296" y="137" />
+        <di:waypoint x="252" y="64" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1xmxoqo_di" bpmnElement="Association_1xmxoqo">
+        <di:waypoint x="503" y="217" />
+        <di:waypoint x="544" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_12kr3qt_di" bpmnElement="Association_12kr3qt">
+        <di:waypoint x="666" y="137" />
+        <di:waypoint x="704" y="80" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0ther5z_di" bpmnElement="Association_0ther5z">
+        <di:waypoint x="706" y="290" />
+        <di:waypoint x="766" y="217" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

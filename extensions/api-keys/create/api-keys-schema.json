@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+        "type": "string",
+        "description": "Add a new api key",
+        "title": "New api key name"
+    }
+  }
+}

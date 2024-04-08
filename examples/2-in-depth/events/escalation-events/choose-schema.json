@@ -1,0 +1,18 @@
+{
+  "title": "Dropdown list",
+  "description": "A dropdown list with options pulled form existing Task Data. IMPORTANT - Add 'fruits' to Task Data before using this component!!!",
+  "type": "object",
+  "required": ["path"],
+  "properties": {
+    "path": {
+      "title": "Select a Path",
+      "type": "string",
+      "enum": [
+        "Path A",
+        "Path B",
+        "Path C",
+        "Path D"
+      ]
+    }
+  }
+}

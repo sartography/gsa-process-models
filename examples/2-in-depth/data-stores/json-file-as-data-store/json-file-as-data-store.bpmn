@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:spiffworkflow="http://spiffworkflow.org/bpmn/schema/1.0/core" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_96f6665" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-dev">
+  <bpmn:process id="Process_json_file_as_data_store_95sczqr" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_17db3yp</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_17db3yp" sourceRef="StartEvent_1" targetRef="Activity_0qpzdpu" />
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>The process instance completed successfully.</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0gsr5ck</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_12pkbxb" sourceRef="Activity_0qpzdpu" targetRef="Activity_1uby4vn" />
+    <bpmn:dataStoreReference id="DataStoreReference_0ak5gko" name="Gatoraide Flavors" dataStoreRef="gatoraide_flavors" type="json" />
+    <bpmn:scriptTask id="Activity_0qpzdpu" name="Example Script task">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>{{gatoraide_flavors}}</spiffworkflow:instructionsForEndUser>
+        <spiffworkflow:unitTests>
+          <spiffworkflow:unitTest id="flavor_check">
+            <spiffworkflow:inputJson>{ "gatoraide_flavors" :
+ [
+    {
+      "name": "Glacier Freeze",
+      "color": "#C0C0C0",
+      "description": "Icy, refreshing citrus flavor"
+    }
+ ]
+}
+
+</spiffworkflow:inputJson>
+            <spiffworkflow:expectedOutputJson>{
+  "gatoraide_flavors": [
+    {
+      "name": "Glacier Freeze",
+      "color": "#C0C0C0",
+      "description": "Icy, refreshing citrus flavor"
+    }
+  ],
+  "gator_select": [
+    {
+      "value": "Glacier Freeze",
+      "label": "Glacier Freeze"
+    }
+  ],
+  "flavor": {
+    "name": "Glacier Freeze",
+    "color": "#C0C0C0",
+    "description": "Icy, refreshing citrus flavor"
+  }
+}</spiffworkflow:expectedOutputJson>
+          </spiffworkflow:unitTest>
+        </spiffworkflow:unitTests>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_17db3yp</bpmn:incoming>
+      <bpmn:outgoing>Flow_12pkbxb</bpmn:outgoing>
+      <bpmn:property id="Property_17g0h45" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_1gjg5yh">
+        <bpmn:sourceRef>DataStoreReference_0ak5gko</bpmn:sourceRef>
+        <bpmn:targetRef>Property_17g0h45</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:script>gator_select = []
+for flavor in gatoraide_flavors:
+    gator_select.append({
+        "label": flavor["name"],
+        "value": flavor["name"]
+    })
+    </bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_0av1k7e" sourceRef="Activity_1uby4vn" targetRef="Activity_1tndkzk" />
+    <bpmn:userTask id="Activity_1uby4vn" name="Select A Gatoraide">
+      <bpmn:extensionElements>
+        <spiffworkflow:properties>
+          <spiffworkflow:property name="formJsonSchemaFilename" value="simple-form-schema.json" />
+          <spiffworkflow:property name="formUiSchemaFilename" value="simple-form-uischema.json" />
+        </spiffworkflow:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_12pkbxb</bpmn:incoming>
+      <bpmn:outgoing>Flow_0av1k7e</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0gsr5ck" sourceRef="Activity_1tndkzk" targetRef="EndEvent_1" />
+    <bpmn:manualTask id="Activity_1tndkzk" name="View Gatoraide Selection">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>You selected:
+
+
+# &lt;span style="color:{{selected_flavor.color}}"&gt;{{selected_flavor.name }}&lt;/span&gt;
+
+&gt; {{selected_flavor.description }}
+
+
+{{selected_flavor}}</spiffworkflow:instructionsForEndUser>
+        <spiffworkflow:preScript>for flavor in gatoraide_flavors:
+    if flavor["name"] == selected:
+        selected_flavor = flavor</spiffworkflow:preScript>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0av1k7e</bpmn:incoming>
+      <bpmn:outgoing>Flow_0gsr5ck</bpmn:outgoing>
+      <bpmn:property id="Property_03u9k60" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_055bmmn">
+        <bpmn:sourceRef>DataStoreReference_0ak5gko</bpmn:sourceRef>
+        <bpmn:targetRef>Property_03u9k60</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:manualTask>
+    <bpmn:textAnnotation id="TextAnnotation_004vbhs">
+      <bpmn:text>This converts our data store into a format that can populate a dropdown list.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0fhhtau" sourceRef="Activity_0qpzdpu" targetRef="TextAnnotation_004vbhs" />
+    <bpmn:textAnnotation id="TextAnnotation_1j715sn">
+      <bpmn:text>Re-Read from the file data store and use the selected value to extract the details and display them.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1vkqmn7" sourceRef="Activity_1tndkzk" targetRef="TextAnnotation_1j715sn" />
+    <bpmn:textAnnotation id="TextAnnotation_0rw9hng">
+      <bpmn:text>!!!! A bug (work is in progress) prevents you from selecting json files rom the dropdown list, you must edit the XML to make the connection.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1k4dr7x" sourceRef="DataStoreReference_0ak5gko" targetRef="TextAnnotation_0rw9hng" />
+  </bpmn:process>
+  <bpmn:dataStore id="gatoraide_flavors" name="JSONFileDataStore" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_json_file_as_data_store_95sczqr">
+      <bpmndi:BPMNShape id="TextAnnotation_0rw9hng_di" bpmnElement="TextAnnotation_0rw9hng">
+        <dc:Bounds x="590" y="340" width="212" height="78" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1j715sn_di" bpmnElement="TextAnnotation_1j715sn">
+        <dc:Bounds x="569" y="10" width="180" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_004vbhs_di" bpmnElement="TextAnnotation_004vbhs">
+        <dc:Bounds x="248" y="10" width="143" height="69" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="162" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_14za570_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="702" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_0ak5gko_di" bpmnElement="DataStoreReference_0ak5gko">
+        <dc:Bounds x="445" y="285" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="427" y="342" width="88" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1jgnl7l_di" bpmnElement="Activity_0qpzdpu">
+        <dc:Bounds x="270" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_139lnwz_di" bpmnElement="Activity_1uby4vn">
+        <dc:Bounds x="420" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_16zal0j_di" bpmnElement="Activity_1tndkzk">
+        <dc:Bounds x="570" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1k4dr7x_di" bpmnElement="Association_1k4dr7x">
+        <di:waypoint x="495" y="317" />
+        <di:waypoint x="590" y="342" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1vkqmn7_di" bpmnElement="Association_1vkqmn7">
+        <di:waypoint x="621" y="137" />
+        <di:waypoint x="621" y="80" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0fhhtau_di" bpmnElement="Association_0fhhtau">
+        <di:waypoint x="315" y="137" />
+        <di:waypoint x="307" y="79" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17db3yp_di" bpmnElement="Flow_17db3yp">
+        <di:waypoint x="198" y="177" />
+        <di:waypoint x="270" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12pkbxb_di" bpmnElement="Flow_12pkbxb">
+        <di:waypoint x="370" y="177" />
+        <di:waypoint x="420" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1gjg5yh_di" bpmnElement="DataInputAssociation_1gjg5yh">
+        <di:waypoint x="445" y="288" />
+        <di:waypoint x="364" y="216" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0av1k7e_di" bpmnElement="Flow_0av1k7e">
+        <di:waypoint x="520" y="177" />
+        <di:waypoint x="570" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gsr5ck_di" bpmnElement="Flow_0gsr5ck">
+        <di:waypoint x="670" y="177" />
+        <di:waypoint x="702" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_055bmmn_di" bpmnElement="DataInputAssociation_055bmmn">
+        <di:waypoint x="495" y="288" />
+        <di:waypoint x="576" y="216" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

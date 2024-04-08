@@ -1,0 +1,11 @@
+{
+  "title": "Approve Cheese",
+  "description": "",
+  "properties": {
+    "approve": {
+      "type": "boolean",
+      "title": "Do you approve of this cheese?",
+      "default": false
+    }
+  }
+}

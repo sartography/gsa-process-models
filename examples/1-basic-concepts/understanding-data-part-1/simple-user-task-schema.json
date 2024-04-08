@@ -1,0 +1,21 @@
+{
+  "title": "Date",
+  "description": "Create a date field with a date picker (delivery_date).",
+  "type": "object",
+  "required": [
+    "firstName"
+  ],
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "title": "First Name",
+      "default": "Chuck"
+    },
+    "delivery_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Preferred Delivery Date",
+      "validationErrorMessage": "Date must be today's date or later"
+    }
+  }
+}

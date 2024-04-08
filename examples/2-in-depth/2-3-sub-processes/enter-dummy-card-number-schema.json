@@ -1,0 +1,12 @@
+{
+  "title": "Enter Credit Card Number",
+  "description": "",
+  "properties": {
+    "card_number": {
+      "type": "string",
+      "title": "Card Number(Enter Dummy Card Number)",
+      "default": "1111-2222-3333-4444"
+    }
+  },
+  "required": []
+}

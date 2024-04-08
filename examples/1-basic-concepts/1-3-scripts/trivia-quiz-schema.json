@@ -1,0 +1,19 @@
+{
+  "title": "Trivia Quiz! ",
+  "description": "A quick set of questions with multiple choice answers",
+  "properties": {
+    "flag_stars": {
+      "type": "number",
+      "title": "How many stars are on the European Union Flag? "
+    },
+    "longest_river": {
+      "type": "string",
+      "title": "What is the name of the world’s longest river?"
+    },
+    "woman_nobel": {
+      "type": "string",
+      "title": "Who, in 1903, was the first woman to win a Nobel Prize?"
+    }
+  },
+  "required": ["flag_stars","longest_river","woman_nobel"]
+}

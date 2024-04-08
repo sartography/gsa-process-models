@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:spiffworkflow="http://spiffworkflow.org/bpmn/schema/1.0/core" id="Definitions_96f6665" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-dev">
+  <bpmn:process id="Process_ndztlol" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0810an1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:intermediateThrowEvent id="Event_0zizkac" name="Halfway There">
+      <bpmn:incoming>Flow_124a56c</bpmn:incoming>
+      <bpmn:outgoing>Flow_15uum35</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateThrowEvent id="Event_0lc68ss" name="Process Started">
+      <bpmn:incoming>Flow_0810an1</bpmn:incoming>
+      <bpmn:outgoing>Flow_0j11aik</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:manualTask id="Activity_0oh37zx" name="Introduction">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>We will cover two distinct topics here -
+1. **Milestones** A way to view, in the logs, what important points were reached in a process, and at what time they occurred.  This can help track where potential bottlenecks are happening and where things need to be reorganized.
+2. **Process Metadata** Allows you to pull out important pieces of critical information that are collected as processes are executed, and make this information available in reports.
+
+As you progress through this workflow, we will ask you to check out the logs (available as link from the Process Instance page, which you can reach from the breadcrumbs at the top of the page at any time).  There you should see when each milestone is achieved.
+
+When this process is complete, go to the "Process Instances" tab at the very top of this web page.  There you can create a report that will show your responses to this form, and you can modify it to include all of your responses to the question we'll ask you later in this process. </spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0j11aik</bpmn:incoming>
+      <bpmn:outgoing>Flow_124a56c</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:sequenceFlow id="Flow_0zigg57" />
+    <bpmn:userTask id="Activity_0e776cx" name="Saving Metadata">
+      <bpmn:extensionElements>
+        <spiffworkflow:properties>
+          <spiffworkflow:property name="formJsonSchemaFilename" value="last_spam-schema.json" />
+          <spiffworkflow:property name="formUiSchemaFilename" value="last_spam-uischema.json" />
+        </spiffworkflow:properties>
+        <spiffworkflow:instructionsForEndUser>Before you complete this form, click on the breadcrumbs in the top left hand corner on this page where it says "process instance ###".  On that page you will see a "Logs" button that will display all of the milestones completed in the process so far.  There should be two.  "Process Started" and "Halfway There".  When you are done, just click the on the "Saving Metadata" to continue, and complete this web form.</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_15uum35</bpmn:incoming>
+      <bpmn:outgoing>Flow_0mq45ib</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_0dfxskn">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>Ok, now that you have answered the question at least once, you can see this in a report on the Process Instances Page. 
+
+When you create a Process Model (and when you edit it's properties later) you have the ability to specify pieces of the Task Data that you want to make available in reports later on.
+You can end up with a lot of information when running a process - and if you have dozens or hundreds of processes you can have thousands of individual pieces of information.
+Metadata allows you to say, that for this paticular process model about ducks, the salient bits of information are the "species" and the "quacks_per_minute".
+You can tell SpiffWorkflow these pieces in paticular are important and it will save them (index them) in a way that is fast and efficient, so when you are searching for all processes you can include these two critical pieces in your reports!
+
+In this case, we are saving the critical bit of data called "spam_thoughts".  
+
+Follow these steps:
+
+1. Click on Process Instances in the top bar 
+2. Click the "Filter Options" button
+3. Select "Metadata - ...." in the Process Dropdown.
+4. In the "Columns" section, click the "+" button
+5. In the popup select "spam_thought" - no need to give a condition value at first.
+6. Click Save
+7. Click Apply
+
+
+You should now see a report showing every time you submitted this form, and what value you selected for "spam_thought".  It's a simple example, but insanely powerful.
+
+You can now click "Save" and keep this report around forever.  So anytime you are wondering about all the different thoughts you have about Spam, you can re-run this report and find out!
+
+</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0mq45ib</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0810an1" sourceRef="StartEvent_1" targetRef="Event_0lc68ss" />
+    <bpmn:sequenceFlow id="Flow_0j11aik" sourceRef="Event_0lc68ss" targetRef="Activity_0oh37zx" />
+    <bpmn:sequenceFlow id="Flow_124a56c" sourceRef="Activity_0oh37zx" targetRef="Event_0zizkac" />
+    <bpmn:sequenceFlow id="Flow_15uum35" sourceRef="Event_0zizkac" targetRef="Activity_0e776cx" />
+    <bpmn:sequenceFlow id="Flow_0mq45ib" sourceRef="Activity_0e776cx" targetRef="Event_0dfxskn" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_ndztlol">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="-28" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0zizkac_di" bpmnElement="Event_0zizkac">
+        <dc:Bounds x="372" y="159" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="354" y="135" width="72" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0lc68ss_di" bpmnElement="Event_0lc68ss">
+        <dc:Bounds x="72" y="159" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="50" y="135" width="79" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1mnz0lo_di" bpmnElement="Activity_0oh37zx">
+        <dc:Bounds x="190" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1q1sh4g_di" bpmnElement="Activity_0e776cx">
+        <dc:Bounds x="480" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0dfxskn_di" bpmnElement="Event_0dfxskn">
+        <dc:Bounds x="622" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0810an1_di" bpmnElement="Flow_0810an1">
+        <di:waypoint x="8" y="177" />
+        <di:waypoint x="72" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j11aik_di" bpmnElement="Flow_0j11aik">
+        <di:waypoint x="108" y="177" />
+        <di:waypoint x="190" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_124a56c_di" bpmnElement="Flow_124a56c">
+        <di:waypoint x="290" y="177" />
+        <di:waypoint x="372" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15uum35_di" bpmnElement="Flow_15uum35">
+        <di:waypoint x="408" y="177" />
+        <di:waypoint x="480" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0mq45ib_di" bpmnElement="Flow_0mq45ib">
+        <di:waypoint x="580" y="177" />
+        <di:waypoint x="622" y="177" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

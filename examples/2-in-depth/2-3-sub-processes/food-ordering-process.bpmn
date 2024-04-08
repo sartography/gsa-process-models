@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:spiffworkflow="http://spiffworkflow.org/bpmn/schema/1.0/core" id="Definitions_96f6665" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-dev">
+  <bpmn:process id="Food_Ordering_Process" name="Food Ordering Process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0ikhfhp</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0ikhfhp" sourceRef="StartEvent_1" targetRef="Activity_0gt23x8" />
+    <bpmn:sequenceFlow id="Flow_0ysk0b2" sourceRef="Activity_0gt23x8" targetRef="Activity_1t4zomp" />
+    <bpmn:sequenceFlow id="Flow_0smi6w4" sourceRef="Activity_1t4zomp" targetRef="Activity_12as3jo" />
+    <bpmn:sequenceFlow id="Flow_0of7hx2" sourceRef="Activity_12as3jo" targetRef="Activity_1o9tfo2" />
+    <bpmn:sequenceFlow id="Flow_0iiz32q" sourceRef="Activity_1o9tfo2" targetRef="Activity_0in2gie" />
+    <bpmn:endEvent id="Event_0p1bthn">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>Thank you for following our food ordering process. Hope now you have a good idea about the BPMN sub processes and Call Activities.
+
+### Get Involved!
+Please get in touch with us!  We would love to help you define your business processes.  There is no end to what we can accomplish if we work together.  Please reach out to Dan at [dan@sartography.com](mailto:dan@sartography.com) to get started.</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_043v27k</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_043v27k" sourceRef="Activity_0in2gie" targetRef="Event_0p1bthn" />
+    <bpmn:manualTask id="Activity_12as3jo" name="Display Bill Value">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>We have completed the Sub Process, below are the information we captured from activities in the sub process.
+
+Next, we will use a call activity to handle the payment process.
+
+
+Hello {{name}} 
+
+Your Order is   
+
+**Appetizers**  
+{% for ap in appetizers %}
+{{ ap }}   
+{% endfor %}
+
+**Soups**  
+{% for sp in soups %}
+{{ sp }}   
+{% endfor %}
+
+**Main Course**  
+{% for mn in mains %}
+{{ mn }}   
+{% endfor %}
+
+**Desserts**  
+{% for ds in desserts %}
+{{ ds }}   
+{% endfor %}
+
+Total Cost of your order is ${{cost}}
+</spiffworkflow:instructionsForEndUser>
+        <spiffworkflow:preScript>appetizers = []
+if bruschetta:
+  appetizers.append("Bruschetta")
+if buffalo_wings:
+  appetizers.append("Buffalo Wings")
+if onion_rings:
+  appetizers.append("Onion Rings")
+
+soups = []
+if chicken_noodle_soup:
+  soups.append("Chicken Noodle Soup")
+if french_onion_soup:
+  soups.append("FrenchOnion Soup")
+if roasted_pumpkin_soup:
+  soups.append("Roasted Pumpkin Soup")
+if tom_yum_soup:
+  soups.append("Tom Yum Soup")
+
+mains = []
+if chicken_cordon_bleu:
+  mains.append("Chicken Cordon Bleu")
+if vegetable_biryani:
+  mains.append("Vegetable Biryani")
+if scallops_with_basil_risotto:
+  mains.append("Scallops with Basil Risotto")
+if beef_lasagna:
+  mains.append("Beef Lasagna")
+if turkey_enchilada:
+  mains.append("Turkeyb Enchilada")
+
+desserts = []
+if key_lime_pie:
+  desserts.append("Key Lime Pie")
+if red_velvet_cake:
+  desserts.append("Red Velvet Cake")
+if new_york_cheesecake:
+  desserts.append("New York Cheesecake")
+if thai_mango_sticky_rice:
+  desserts.append("Thai Mango Sticky Rice")
+if tiramisu:
+  desserts.append("Tiramisu")
+
+cost = len(appetizers) * 5 + len(soups) * 12 + len(mains) * 15 + len(desserts) * 7
+</spiffworkflow:preScript>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0smi6w4</bpmn:incoming>
+      <bpmn:outgoing>Flow_0of7hx2</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="Activity_0in2gie" name="Order Confirmation">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser>Hello {{name}} 
+
+Thank you for your order.
+Your order reference number is 1106
+
+**Appetizers**  
+{% for ap in appetizers %}
+{{ ap }}   
+{% endfor %}
+
+**Soups**  
+{% for sp in soups %}
+{{ sp }}   
+{% endfor %}
+
+**Main Course**  
+{% for mn in mains %}
+{{ mn }}   
+{% endfor %}
+
+**Desserts**  
+{% for ds in desserts %}
+{{ ds }}   
+{% endfor %}
+
+Your order will be delivered soon.</spiffworkflow:instructionsForEndUser>
+        <spiffworkflow:preScript />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0iiz32q</bpmn:incoming>
+      <bpmn:outgoing>Flow_043v27k</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:userTask id="Activity_0gt23x8" name="Enter Name">
+      <bpmn:extensionElements>
+        <spiffworkflow:properties>
+          <spiffworkflow:property name="formJsonSchemaFilename" value="name-schema.json" />
+          <spiffworkflow:property name="formUiSchemaFilename" value="name-uischema.json" />
+        </spiffworkflow:properties>
+        <spiffworkflow:preScript />
+        <spiffworkflow:instructionsForEndUser>## Welcome to the Sub Process and Call Activity Example
+
+This process model will demonstrate the difference between a BPMN Sub Process and a Call Activity.
+
+**Sub Process** is a collection of flow objects, that are grouped to increase the readability and understanding of the process, by reducing the complexity.
+
+**Call Activity** simply reuses an already defined process to perform a predefined task.
+
+This process model takes you through the steps of ordering food items.
+
+First, enter your name in this form (which is a user task)</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0ikhfhp</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ysk0b2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:subProcess id="Activity_1t4zomp" name="Select Food">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0ysk0b2</bpmn:incoming>
+      <bpmn:outgoing>Flow_0smi6w4</bpmn:outgoing>
+      <bpmn:startEvent id="Event_0qpcdf2">
+        <bpmn:outgoing>Flow_0eww58z</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_0eww58z" sourceRef="Event_0qpcdf2" targetRef="Activity_07pn419" />
+      <bpmn:sequenceFlow id="Flow_0fsaner" sourceRef="Activity_07pn419" targetRef="Activity_0ahp0jr" />
+      <bpmn:endEvent id="Event_1ubt4qf">
+        <bpmn:incoming>Flow_1ul5cqu</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:userTask id="Activity_07pn419" name="Appetizer">
+        <bpmn:extensionElements>
+          <spiffworkflow:properties>
+            <spiffworkflow:property name="formUiSchemaFilename" value="appetizer-uischema.json" />
+            <spiffworkflow:property name="formJsonSchemaFilename" value="appetizer-schema.json" />
+          </spiffworkflow:properties>
+          <spiffworkflow:instructionsForEndUser>Now we are inside the 'Select Food' sub process.
+This sub process is defined to compound all the tasks related to selecting food items. By creating this sub process, we hide the complexity of selecting individual food items, like appetizers, soups, etc. from the upper-level process.
+
+The first activity in the sub process is to select the Appetizers.</spiffworkflow:instructionsForEndUser>
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_0eww58z</bpmn:incoming>
+        <bpmn:outgoing>Flow_0fsaner</bpmn:outgoing>
+      </bpmn:userTask>
+      <bpmn:userTask id="Activity_0ahp0jr" name="Soup">
+        <bpmn:extensionElements>
+          <spiffworkflow:properties>
+            <spiffworkflow:property name="formUiSchemaFilename" value="soup-uischema.json" />
+            <spiffworkflow:property name="formJsonSchemaFilename" value="soup-schema.json" />
+          </spiffworkflow:properties>
+          <spiffworkflow:instructionsForEndUser>The second activity in the sub process is to select the soup.
+
+&gt; NOTE:  As you step through this process - click on the "Process Instance Id: ##" in the breadcrumbs at the top of the page, and view the diagram.  You will see it is keeping track of where you are.  
+Click on the blue arrow icon of the sub process to go inside the sub process to view its' activities.
+
+&gt;You can use the "Go" button to continue with the process.</spiffworkflow:instructionsForEndUser>
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_0fsaner</bpmn:incoming>
+        <bpmn:outgoing>Flow_105pv70</bpmn:outgoing>
+      </bpmn:userTask>
+      <bpmn:sequenceFlow id="Flow_105pv70" sourceRef="Activity_0ahp0jr" targetRef="Activity_1wc42e5" />
+      <bpmn:sequenceFlow id="Flow_06kwk3d" sourceRef="Activity_1wc42e5" targetRef="Activity_1dhi6tb" />
+      <bpmn:sequenceFlow id="Flow_1ul5cqu" sourceRef="Activity_1dhi6tb" targetRef="Event_1ubt4qf" />
+      <bpmn:userTask id="Activity_1wc42e5" name="Mains">
+        <bpmn:extensionElements>
+          <spiffworkflow:properties>
+            <spiffworkflow:property name="formUiSchemaFilename" value="mains-uischema.json" />
+            <spiffworkflow:property name="formJsonSchemaFilename" value="mains-schema.json" />
+          </spiffworkflow:properties>
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_105pv70</bpmn:incoming>
+        <bpmn:outgoing>Flow_06kwk3d</bpmn:outgoing>
+      </bpmn:userTask>
+      <bpmn:userTask id="Activity_1dhi6tb" name="Dessert">
+        <bpmn:extensionElements>
+          <spiffworkflow:properties>
+            <spiffworkflow:property name="formUiSchemaFilename" value="dessert-uischema.json" />
+            <spiffworkflow:property name="formJsonSchemaFilename" value="dessert-schema.json" />
+          </spiffworkflow:properties>
+          <spiffworkflow:instructionsForEndUser>This is the last activity of the subprocess.
+
+When you complete this activity it'll take you back to the main process.</spiffworkflow:instructionsForEndUser>
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_06kwk3d</bpmn:incoming>
+        <bpmn:outgoing>Flow_1ul5cqu</bpmn:outgoing>
+      </bpmn:userTask>
+      <bpmn:textAnnotation id="TextAnnotation_1qvoa7g">
+        <bpmn:text>Selecting different food items grouped together and created as a sub process</bpmn:text>
+      </bpmn:textAnnotation>
+      <bpmn:association id="Association_13llb66" sourceRef="Activity_07pn419" targetRef="TextAnnotation_1qvoa7g" />
+      <bpmn:textAnnotation id="TextAnnotation_12s3x57">
+        <bpmn:text>This will reduce the complexity of the main diagram</bpmn:text>
+      </bpmn:textAnnotation>
+      <bpmn:association id="Association_0ygvqr5" sourceRef="Activity_0ahp0jr" targetRef="TextAnnotation_12s3x57" />
+    </bpmn:subProcess>
+    <bpmn:callActivity id="Activity_1o9tfo2" name="Handle Payment" calledElement="Handle_Payment">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0of7hx2</bpmn:incoming>
+      <bpmn:outgoing>Flow_0iiz32q</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:textAnnotation id="TextAnnotation_069394d">
+      <bpmn:text>User Tasks allow you to collect information from real people through web forms.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_137m533" sourceRef="Activity_0gt23x8" targetRef="TextAnnotation_069394d" />
+    <bpmn:textAnnotation id="TextAnnotation_1it0738">
+      <bpmn:text>Sub process is a collection of activities, that help us hide the complexity of the process flow and make it easier to understand.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1qa21fe" sourceRef="Activity_1t4zomp" targetRef="TextAnnotation_1it0738" />
+    <bpmn:textAnnotation id="TextAnnotation_1s0ifz7">
+      <bpmn:text>Call Activity is a way to reuse a separately defined process inside this process.  To open this diagram, select this task, then use the Properties Panel on the right and click the "Launch Editor" button under Called Activity.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_01zk2e4" sourceRef="Activity_1o9tfo2" targetRef="TextAnnotation_1s0ifz7" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Food_Ordering_Process">
+      <bpmndi:BPMNShape id="TextAnnotation_1s0ifz7_di" bpmnElement="TextAnnotation_1s0ifz7">
+        <dc:Bounds x="470" y="-80" width="180" height="123" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="-78" y="122" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0p1bthn_di" bpmnElement="Event_0p1bthn">
+        <dc:Bounds x="812" y="122" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1vvpanp_di" bpmnElement="Activity_12as3jo">
+        <dc:Bounds x="330" y="100" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1d61zzl_di" bpmnElement="Activity_0in2gie">
+        <dc:Bounds x="650" y="100" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_091e1j9_di" bpmnElement="Activity_0gt23x8">
+        <dc:Bounds x="10" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1r95drw_di" bpmnElement="Activity_1t4zomp">
+        <dc:Bounds x="170" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1wbb006_di" bpmnElement="Activity_1o9tfo2">
+        <dc:Bounds x="490" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_069394d_di" bpmnElement="TextAnnotation_069394d">
+        <dc:Bounds x="10" y="-70" width="100" height="113" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1it0738_di" bpmnElement="TextAnnotation_1it0738">
+        <dc:Bounds x="140" y="-70" width="160" height="89" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_01zk2e4_di" bpmnElement="Association_01zk2e4">
+        <di:waypoint x="536" y="100" />
+        <di:waypoint x="530" y="43" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ikhfhp_di" bpmnElement="Flow_0ikhfhp">
+        <di:waypoint x="-42" y="140" />
+        <di:waypoint x="10" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ysk0b2_di" bpmnElement="Flow_0ysk0b2">
+        <di:waypoint x="110" y="140" />
+        <di:waypoint x="170" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0smi6w4_di" bpmnElement="Flow_0smi6w4">
+        <di:waypoint x="270" y="140" />
+        <di:waypoint x="330" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0of7hx2_di" bpmnElement="Flow_0of7hx2">
+        <di:waypoint x="430" y="140" />
+        <di:waypoint x="490" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0iiz32q_di" bpmnElement="Flow_0iiz32q">
+        <di:waypoint x="590" y="140" />
+        <di:waypoint x="650" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_043v27k_di" bpmnElement="Flow_043v27k">
+        <di:waypoint x="750" y="140" />
+        <di:waypoint x="812" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_137m533_di" bpmnElement="Association_137m533">
+        <di:waypoint x="60" y="100" />
+        <di:waypoint x="60" y="43" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1qa21fe_di" bpmnElement="Association_1qa21fe">
+        <di:waypoint x="220" y="100" />
+        <di:waypoint x="220" y="20" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_0936ib9">
+    <bpmndi:BPMNPlane id="BPMNPlane_13o3bgt" bpmnElement="Activity_1t4zomp">
+      <bpmndi:BPMNShape id="Event_0qpcdf2_di" bpmnElement="Event_0qpcdf2">
+        <dc:Bounds x="182" y="262" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ubt4qf_di" bpmnElement="Event_1ubt4qf">
+        <dc:Bounds x="922" y="262" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_176lqtx_di" bpmnElement="Activity_07pn419">
+        <dc:Bounds x="270" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0u75fgx_di" bpmnElement="Activity_0ahp0jr">
+        <dc:Bounds x="430" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1f6uupf_di" bpmnElement="Activity_1wc42e5">
+        <dc:Bounds x="590" y="240" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_015wptt_di" bpmnElement="Activity_1dhi6tb">
+        <dc:Bounds x="750" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1qvoa7g_di" bpmnElement="TextAnnotation_1qvoa7g">
+        <dc:Bounds x="270" y="100" width="100" height="98" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_12s3x57_di" bpmnElement="TextAnnotation_12s3x57">
+        <dc:Bounds x="430" y="114" width="100" height="70" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0eww58z_di" bpmnElement="Flow_0eww58z">
+        <di:waypoint x="218" y="280" />
+        <di:waypoint x="270" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0fsaner_di" bpmnElement="Flow_0fsaner">
+        <di:waypoint x="370" y="280" />
+        <di:waypoint x="430" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_105pv70_di" bpmnElement="Flow_105pv70">
+        <di:waypoint x="530" y="280" />
+        <di:waypoint x="590" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06kwk3d_di" bpmnElement="Flow_06kwk3d">
+        <di:waypoint x="690" y="280" />
+        <di:waypoint x="750" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ul5cqu_di" bpmnElement="Flow_1ul5cqu">
+        <di:waypoint x="850" y="280" />
+        <di:waypoint x="922" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_13llb66_di" bpmnElement="Association_13llb66">
+        <di:waypoint x="320" y="240" />
+        <di:waypoint x="320" y="198" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0ygvqr5_di" bpmnElement="Association_0ygvqr5">
+        <di:waypoint x="480" y="240" />
+        <di:waypoint x="480" y="184" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

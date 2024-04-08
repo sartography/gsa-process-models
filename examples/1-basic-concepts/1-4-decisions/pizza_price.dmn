@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="abc" name="abc" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="decision_abc" name="Pizza Prices">
+    <decisionTable id="decisionTable_1">
+      <input id="input_1">
+        <inputExpression id="inputExpression_1" typeRef="string">
+          <text>size</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" name="base_price" typeRef="number" />
+      <output id="OutputClause_09kn87e" name="cost_per_topping" typeRef="number" biodi:width="154" />
+      <rule id="DecisionRule_1dzzpx9">
+        <description>Personal cheese pizza starts at $10, with $1 per added topping.</description>
+        <inputEntry id="UnaryTests_1p51myj">
+          <text>"Personal"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_039dl5s">
+          <text>10.00</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ytn8c1">
+          <text>1.00</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_12wufzt">
+        <description>Medium pizzas start at 14, and cost 1.25 per topping.</description>
+        <inputEntry id="UnaryTests_1x01441">
+          <text>"Medium"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1oturg0">
+          <text>14.00</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_18lgdmu">
+          <text>1.50</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_08fpvbl">
+        <description>Large Pizzas are 16, but extra topings are 2.00.</description>
+        <inputEntry id="UnaryTests_0g6wb69">
+          <text>"Large"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0iwpp9d">
+          <text>16.00</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0xx46pd">
+          <text>2.00</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_1cykosu">
+      <dmndi:DMNShape id="DMNShape_1dhfq2s" dmnElementRef="decision_abc">
+        <dc:Bounds height="80" width="180" x="157" y="151" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

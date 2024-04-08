@@ -1,0 +1,9 @@
+{
+    "description": "This demonstrates one possible way to allow people to modify their request until the next user takes an action. \nThis requires keeping two tasks (each in a different lane) active at the same time. ",
+    "display_name": "Allow Updates Until Approved",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "edit_till_action.bpmn",
+    "primary_process_id": "edit_till_action"
+}

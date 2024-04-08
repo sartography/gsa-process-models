@@ -1,0 +1,15 @@
+{
+  "ui:order": [
+    "full_name",
+    "organization",
+    "role",
+    "purpose"
+  ],
+  "full_name": {
+    "ui:autofocus": true,
+    "ui:enableMarkdownInDescription": true
+  },
+  "purpose": {
+    "ui:widget": "textarea"
+  }
+}

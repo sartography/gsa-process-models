@@ -1,0 +1,19 @@
+{
+  "title": "Questions about Spam",
+  "description": "",
+  "properties": {
+    "spam_thought": {
+      "type": "string",
+      "title": "When I hear the word \"spam\" the first thing I think of is ...",
+      "enum": [
+        "the delicious potted meat product",
+        "solicitous emails",
+        "greedy text messages",
+        "vikings",
+        "Hawaii",
+        "the whole bloody internet"
+      ]
+    }
+  },
+  "required": []
+}

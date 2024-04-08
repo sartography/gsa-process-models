@@ -1,0 +1,27 @@
+{
+  "title": "Dessert",
+  "description": "Please select your Desserts",
+  "properties": {
+    "key_lime_pie": {
+      "type": "boolean",
+      "title": "Key lime pie"
+    },
+    "red_velvet_cake": {
+      "type": "boolean",
+      "title": "Red velvet cake"
+    },
+    "new_york_cheesecake": {
+      "type": "boolean",
+      "title": "New York Cheesecake"
+    },
+    "thai_mango_sticky_rice": {
+      "type": "boolean",
+      "title": "Thai Mango Sticky Rice"
+    },
+    "tiramisu": {
+      "type": "boolean",
+      "title": "Tiramisu"
+    }
+  },
+  "required": []
+}

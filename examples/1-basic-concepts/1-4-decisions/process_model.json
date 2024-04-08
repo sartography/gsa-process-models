@@ -1,0 +1,9 @@
+{
+    "description": "This example introduces Decision Tables - a simple way to define rules in a tabular format.",
+    "display_name": "Making Decisions",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "decision_example.bpmn",
+    "primary_process_id": "Process_5bmdbcp"
+}

@@ -1,0 +1,9 @@
+{
+    "description": "Short Python scripts can be highly useful way to introduce a bit of code when you need it - to set default values for forms, make decisions, reformat information, and many other tasks.",
+    "display_name": "Writing Scripts",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "script-task.bpmn",
+    "primary_process_id": "Process_bd2e724"
+}

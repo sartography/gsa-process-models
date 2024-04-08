@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:spiffworkflow="http://spiffworkflow.org/bpmn/schema/1.0/core" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_96f6665" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.0-dev">
+  <bpmn:collaboration id="Collaboration_17s0dpt">
+    <bpmn:participant id="Participant_0x8lk06" processRef="Process_c707ql0" />
+    <bpmn:correlationKey name="order">
+      <bpmn:correlationPropertyRef>table_number</bpmn:correlationPropertyRef>
+    </bpmn:correlationKey>
+  </bpmn:collaboration>
+  <bpmn:process id="Process_c707ql0" isExecutable="true">
+    <bpmn:sequenceFlow id="Flow_1xur8qc" sourceRef="StartEvent_1" targetRef="Activity_01hg2o8" />
+    <bpmn:sendTask id="Activity_0te0guu" name="Send Back to Waiter" messageRef="Message_1at2lq5">
+      <bpmn:incoming>Flow_13rgehj</bpmn:incoming>
+      <bpmn:outgoing>Flow_0a66fz8</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="Event_0qq9gln">
+      <bpmn:incoming>Flow_0a66fz8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0a66fz8" sourceRef="Activity_0te0guu" targetRef="Event_0qq9gln" />
+    <bpmn:startEvent id="StartEvent_1" name="Chef_Start">
+      <bpmn:outgoing>Flow_1xur8qc</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1b4596r" messageRef="Message_1yme4ca" />
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_13rgehj" sourceRef="Activity_01hg2o8" targetRef="Activity_0te0guu" />
+    <bpmn:manualTask id="Activity_01hg2o8" name="Confirm Order Ready">
+      <bpmn:extensionElements>
+        <spiffworkflow:instructionsForEndUser># Please prepare this order for Table # {{order_to_cook.table_number}}:
+
+* **Drink**: {{order_to_cook.drink}}
+* **Meal**: {{order_to_cook.meal}}
+</spiffworkflow:instructionsForEndUser>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1xur8qc</bpmn:incoming>
+      <bpmn:outgoing>Flow_13rgehj</bpmn:outgoing>
+    </bpmn:manualTask>
+  </bpmn:process>
+  <bpmn:correlationProperty id="table_number" name="table_number">
+    <bpmn:correlationPropertyRetrievalExpression messageRef="Message_1yme4ca">
+      <bpmn:formalExpression>table_number</bpmn:formalExpression>
+    </bpmn:correlationPropertyRetrievalExpression>
+    <bpmn:correlationPropertyRetrievalExpression messageRef="Message_1at2lq5">
+      <bpmn:formalExpression>table_number</bpmn:formalExpression>
+    </bpmn:correlationPropertyRetrievalExpression>
+  </bpmn:correlationProperty>
+  <bpmn:message id="Message_1yme4ca" name="order_accept">
+    <bpmn:extensionElements>
+      <spiffworkflow:messageVariable>order_to_cook</spiffworkflow:messageVariable>
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:message id="Message_1at2lq5" name="order_dispatch">
+    <bpmn:extensionElements>
+      <spiffworkflow:messagePayload>order_to_cook</spiffworkflow:messagePayload>
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_17s0dpt">
+      <bpmndi:BPMNShape id="Participant_0x8lk06_di" bpmnElement="Participant_0x8lk06" isHorizontal="true">
+        <dc:Bounds x="170" y="190" width="500" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_09vcf3t_di" bpmnElement="Activity_0te0guu">
+        <dc:Bounds x="430" y="220" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0qq9gln_di" bpmnElement="Event_0qq9gln">
+        <dc:Bounds x="592" y="242" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ichrlv_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="222" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="215" y="285" width="53" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_04ie7t2_di" bpmnElement="Activity_01hg2o8">
+        <dc:Bounds x="290" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1xur8qc_di" bpmnElement="Flow_1xur8qc">
+        <di:waypoint x="258" y="260" />
+        <di:waypoint x="290" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0a66fz8_di" bpmnElement="Flow_0a66fz8">
+        <di:waypoint x="530" y="260" />
+        <di:waypoint x="592" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13rgehj_di" bpmnElement="Flow_13rgehj">
+        <di:waypoint x="390" y="260" />
+        <di:waypoint x="430" y="260" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

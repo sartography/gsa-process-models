@@ -1,0 +1,9 @@
+{
+    "description": "Create an API (a URL that can return machine readable information) using BPMN.\nThe process will return the correct price for whatever popcorn size you specify in the request.\nSee the process model for more information.\n",
+    "display_name": "Message API",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "message-api.bpmn",
+    "primary_process_id": "Process_message_api_3hwsuhk"
+}
