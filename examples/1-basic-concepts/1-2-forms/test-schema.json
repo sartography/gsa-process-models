@@ -2,28 +2,59 @@
   "title": "Nested Form / Repeating Section",
   "description": "Allow the form submitter to add multiple entries for a set of fields.",
   "type": "object",
+  "required": [
+    "bio",
+    "telephone"
+  ],
   "properties": {
-    "tasks": {
-      "type": "array",
-      "title": "Tasks",
-      "items": {
-        "type": "object",
-        "required": [
-          "title"
-        ],
-        "properties": {
-          "title": {
-            "type": "string",
-            "title": "Title",
-            "description": "Please describe the task to complete."
-          },
-          "done": {
-            "type": "boolean",
-            "title": "Done?",
-            "default": false
-          }
-        }
-      }
+    "firstName": {
+      "type": "string",
+      "title": "First name"
+    },
+    "lastName": {
+      "type": "string",
+      "title": "Last name",
+      "default": "Norris"
+    },
+    "age": {
+      "type": "integer",
+      "title": "Age",
+      "default": 83,
+      "minimum": 18,
+      "maximum": 130
+    },
+    "bio": {
+      "type": "string",
+      "title": "Bio",
+      "default": "Chuck Norris was once bitten by a poisonous snake. And after a week of excruciating pain, the snake died.",
+      "minLength": 10
+    },
+    "hatedFruit": {
+      "title": "Select your most hated fruit",
+      "type": "string",
+      "anyOf": [
+        "options_from_task_data_var:fruits"     
+      ]
+    },
+    "favoriteFruit": {
+      "title": "Select your favorite fruit",
+      "type": "string",
+      "anyOf": [
+        "options_from_task_data_var:fruits"
+      ]
+    },
+    "telephone": {
+      "type": "string",
+      "title": "Telephone",
+      "pattern": "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$",
+      "validationErrorMessage": "Please provide a valid phone number, for example: +91 (123) 456-7890 or +1 540-555-1234",
+      "default": "1-800-kick-ass"
+    },
+    "delivery_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Preferred Delivery Date",
+      "validationErrorMessage": "Date must be today's date or later"
     }
   }
 }

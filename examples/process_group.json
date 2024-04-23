@@ -1,5 +1,15 @@
 {
+    "correlation_keys": null,
+    "correlation_properties": [],
     "data_store_specifications": {},
     "description": "These examples are provided to help you understand how SpiffWorkflow works.",
-    "display_name": "Examples"
+    "display_name": "Examples",
+    "messages": [
+        {
+            "id": "my_message"
+        },
+        {
+            "id": "my_message"
+        }
+    ]
 }

@@ -150,7 +150,7 @@ You can also change the text you are reading here by updating the *Instructions*
   "Quentin Tarantino": {
       "Reservoir Dogs": [
         {
-          "name": "Mr. White",
+          "name": "Mr. Walter White",
           "actor": "Harvey Keitel",
           "description": "Veteran criminal leading the heist"
         },
@@ -290,7 +290,7 @@ movies = {
         {
           "name": "Dr. Alec Hollard",
           "actor": "Ray Wise",
-          "description": "whatever"
+          "description": "Hero"
         },
       ]
   }
@@ -302,6 +302,9 @@ movies = {
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_key_value_data_store_rnri4w9">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_14za570_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="742" y="159" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1yz3n3c_di" bpmnElement="Activity_0qpzdpu">
         <dc:Bounds x="270" y="137" width="100" height="80" />
@@ -326,9 +329,6 @@ movies = {
       <bpmndi:BPMNShape id="Activity_1fujp1k_di" bpmnElement="Activity_0ttl2d6">
         <dc:Bounds x="570" y="137" width="100" height="80" />
         <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_14za570_di" bpmnElement="EndEvent_1">
-        <dc:Bounds x="742" y="159" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_17db3yp_di" bpmnElement="Flow_17db3yp">
         <di:waypoint x="215" y="177" />

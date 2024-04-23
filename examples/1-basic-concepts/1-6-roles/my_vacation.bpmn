@@ -6,27 +6,15 @@
   <bpmn:process id="Process_9wllce2" isExecutable="true">
     <bpmn:laneSet id="LaneSet_1tmn5gq">
       <bpmn:lane id="Lane_0wgzewb">
-        <bpmn:flowNodeRef>Activity_121gfc7</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0cya923</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_121gfc7</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1pi0b2e</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_0tr6u2s</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_15s7af6" name="Vacation Approver">
         <bpmn:flowNodeRef>Activity_041y60h</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:userTask id="Activity_121gfc7" name="Describe Vacation">
-      <bpmn:extensionElements>
-        <spiffworkflow:properties>
-          <spiffworkflow:property name="formJsonSchemaFilename" value="your-favorite-vacation-spot-schema.json" />
-          <spiffworkflow:property name="formUiSchemaFilename" value="your-favorite-vacation-spot-uischema.json" />
-        </spiffworkflow:properties>
-        <spiffworkflow:postScript />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_08b39kn</bpmn:incoming>
-      <bpmn:outgoing>Flow_12s1u1h</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_08w5ra5" sourceRef="StartEvent_1" targetRef="Activity_0cya923" />
     <bpmn:sequenceFlow id="Flow_0dsxo60" sourceRef="Activity_041y60h" targetRef="Event_1pi0b2e" />
     <bpmn:sequenceFlow id="Flow_08b39kn" sourceRef="Activity_0cya923" targetRef="Activity_121gfc7" />
@@ -48,15 +36,15 @@ When you complete this form you will see the diagram that drives this process.  
 SpiffWorkflow can be configured to read group information from your organization in a number of ways.  We will cover that topic in an article on Integration later on.  If a lane name in your BPMN diagram matches the name of a user group, then it will allow any member of that group to complete the task.
 
 #### Lane assignment with Task Data
- You can set it in the Task Data, via a script task or using a Decision Table.  For instance, a script task like the following:
+ You can set it in the Task Data, via a script task or using a Decision Table.  For instance, a script like the following:
 ```python
 lane_owners =
     { "Vacation Approver": ["The Funkalicious Dan"] }    
 }
 ```
-Would assure that any lane labeled "Vacation Approver" in the current diagram will be assigned to the user with id "The Funkalicious Dan".   
+would assure that any lane labeled "Vacation Approver" in the current diagram will be assigned to the user with id "The Funkalicious Dan".   
 
-The example here uses this approach, it figures out who the current user is (that would be you), and assigns you the "Vacation Approver" group.  You can see this happen in a script task when you open the the my_vacation.bpmn file from the Process Model page.
+The example here uses this approach. It figures out who the current user is (that would be you), and assigns you as the "Vacation Approver" group.  You can see this happen in the pre-script of the user task when you open the my_vacation.bpmn file from the Process Model page.
 
 
 
@@ -65,6 +53,37 @@ The example here uses this approach, it figures out who the current user is (tha
       <bpmn:incoming>Flow_08w5ra5</bpmn:incoming>
       <bpmn:outgoing>Flow_08b39kn</bpmn:outgoing>
     </bpmn:manualTask>
+    <bpmn:sequenceFlow id="Flow_12s1u1h" sourceRef="Activity_121gfc7" targetRef="Activity_041y60h" />
+    <bpmn:userTask id="Activity_041y60h" name="Approve Vacation">
+      <bpmn:extensionElements>
+        <spiffworkflow:properties>
+          <spiffworkflow:property name="formJsonSchemaFilename" value="approve-vacation-request-schema.json" />
+          <spiffworkflow:property name="formUiSchemaFilename" value="approve-vacation-request-uischema.json" />
+        </spiffworkflow:properties>
+        <spiffworkflow:instructionsForEndUser>Please complete the form below to approve or deny the vacation request.
+
+* **Requested By**: {{requested_by}}
+* **Location**: {{location}}
+* **Season**: {{season}}
+* **Activities**: {{activites}}
+</spiffworkflow:instructionsForEndUser>
+        <spiffworkflow:preScript>requested_by = get_current_user()['username']
+lane_owners = { "Vacation Approver": [get_current_user()['username']] }    </spiffworkflow:preScript>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_12s1u1h</bpmn:incoming>
+      <bpmn:outgoing>Flow_0dsxo60</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_121gfc7" name="Describe Vacation">
+      <bpmn:extensionElements>
+        <spiffworkflow:properties>
+          <spiffworkflow:property name="formJsonSchemaFilename" value="your-favorite-vacation-spot-schema.json" />
+          <spiffworkflow:property name="formUiSchemaFilename" value="your-favorite-vacation-spot-uischema.json" />
+        </spiffworkflow:properties>
+        <spiffworkflow:postScript />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_08b39kn</bpmn:incoming>
+      <bpmn:outgoing>Flow_12s1u1h</bpmn:outgoing>
+    </bpmn:userTask>
     <bpmn:endEvent id="Event_1pi0b2e">
       <bpmn:extensionElements>
         <spiffworkflow:instructionsForEndUser>Thanks so much for checking out Lanes - this is very simple example.  You could have dozens of lanes in a single diagram, or modify the list of people allowed to complete a process in a loop.  Imagine you need sign-off from 3 of 12 potential people.   You could loop back to the same process 3 times, each time removing people from the list of possible candidates.   
@@ -80,32 +99,6 @@ Please get in touch with us!  We would love to help you as you orchestrate the f
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0dsxo60</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Activity_041y60h" name="Approve Vacation">
-      <bpmn:extensionElements>
-        <spiffworkflow:properties>
-          <spiffworkflow:property name="formJsonSchemaFilename" value="approve-vacation-request-schema.json" />
-          <spiffworkflow:property name="formUiSchemaFilename" value="approve-vacation-request-uischema.json" />
-        </spiffworkflow:properties>
-        <spiffworkflow:instructionsForEndUser>Please complete the form below to approve or deny the vacation request.
-
-* **Requested By**: {{requested_by}}
-* **Location**: {{location}}
-* **Season**: {{season}}
-* **Activities**: {{activites}}
-</spiffworkflow:instructionsForEndUser>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1c2wuo0</bpmn:incoming>
-      <bpmn:outgoing>Flow_0dsxo60</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_12s1u1h" sourceRef="Activity_121gfc7" targetRef="Activity_0tr6u2s" />
-    <bpmn:sequenceFlow id="Flow_1c2wuo0" sourceRef="Activity_0tr6u2s" targetRef="Activity_041y60h" />
-    <bpmn:scriptTask id="Activity_0tr6u2s" name="Assign current user to lane">
-      <bpmn:incoming>Flow_12s1u1h</bpmn:incoming>
-      <bpmn:outgoing>Flow_1c2wuo0</bpmn:outgoing>
-      <bpmn:script>requested_by = get_current_user()['username']
-lane_owners = { "Vacation Approver": [get_current_user()['username']] }    
-</bpmn:script>
-    </bpmn:scriptTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0y7oun0">
@@ -119,9 +112,6 @@ lane_owners = { "Vacation Approver": [get_current_user()['username']] }
       <bpmndi:BPMNShape id="Lane_0wgzewb_di" bpmnElement="Lane_0wgzewb" isHorizontal="true">
         <dc:Bounds x="370" y="70" width="860" height="150" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0axyuw7_di" bpmnElement="Activity_121gfc7">
-        <dc:Bounds x="600" y="127" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="392" y="149" width="36" height="36" />
       </bpmndi:BPMNShape>
@@ -129,39 +119,32 @@ lane_owners = { "Vacation Approver": [get_current_user()['username']] }
         <dc:Bounds x="470" y="127" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1pi0b2e_di" bpmnElement="Event_1pi0b2e">
-        <dc:Bounds x="1152" y="149" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0lxj3pw_di" bpmnElement="Activity_041y60h">
-        <dc:Bounds x="950" y="270" width="100" height="80" />
+        <dc:Bounds x="787" y="270" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_03xh6yh_di" bpmnElement="Activity_0tr6u2s">
-        <dc:Bounds x="740" y="127" width="100" height="80" />
-        <bpmndi:BPMNLabel />
+      <bpmndi:BPMNShape id="Activity_0axyuw7_di" bpmnElement="Activity_121gfc7">
+        <dc:Bounds x="637" y="127" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1pi0b2e_di" bpmnElement="Event_1pi0b2e">
+        <dc:Bounds x="946" y="162" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_08w5ra5_di" bpmnElement="Flow_08w5ra5">
         <di:waypoint x="428" y="167" />
         <di:waypoint x="470" y="167" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0dsxo60_di" bpmnElement="Flow_0dsxo60">
-        <di:waypoint x="1050" y="310" />
-        <di:waypoint x="1081" y="310" />
-        <di:waypoint x="1081" y="167" />
-        <di:waypoint x="1152" y="167" />
+        <di:waypoint x="887" y="310" />
+        <di:waypoint x="964" y="310" />
+        <di:waypoint x="964" y="198" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_08b39kn_di" bpmnElement="Flow_08b39kn">
         <di:waypoint x="570" y="167" />
-        <di:waypoint x="600" y="167" />
+        <di:waypoint x="637" y="167" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_12s1u1h_di" bpmnElement="Flow_12s1u1h">
-        <di:waypoint x="700" y="167" />
-        <di:waypoint x="740" y="167" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1c2wuo0_di" bpmnElement="Flow_1c2wuo0">
-        <di:waypoint x="840" y="167" />
-        <di:waypoint x="895" y="167" />
-        <di:waypoint x="895" y="310" />
-        <di:waypoint x="950" y="310" />
+        <di:waypoint x="687" y="207" />
+        <di:waypoint x="687" y="310" />
+        <di:waypoint x="787" y="310" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -1,0 +1,37 @@
+{
+    "test_case_for_process_instance_5403": {
+        "expected_output_json": {
+            "bulletproof": true,
+            "pushups": true,
+            "score": 3,
+            "score_message": "Pefect! You answered it all correctly.",
+            "thanos": false
+        },
+        "tasks": {
+            "Proccess_general:Activity_Display_Questions": {
+                "data": [
+                    {
+                        "bulletproof": true,
+                        "pushups": true,
+                        "thanos": false
+                    }
+                ]
+            },
+            "Proccess_general:Activity_Perfect": {
+                "data": [
+                    {}
+                ]
+            },
+            "Proccess_general:Activity_Review": {
+                "data": [
+                    {}
+                ]
+            },
+            "Proccess_general:Activity_intro": {
+                "data": [
+                    {}
+                ]
+            }
+        }
+    }
+}

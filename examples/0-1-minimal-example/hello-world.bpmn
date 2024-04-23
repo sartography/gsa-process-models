@@ -35,7 +35,7 @@ Press continue and we'll tell you more ...
 
 </spiffworkflow:instructionsForEndUser>
         <spiffworkflow:allowGuest>false</spiffworkflow:allowGuest>
-        <spiffworkflow:guestConfirmation>Welcome to the basic process!</spiffworkflow:guestConfirmation>
+        <spiffworkflow:guestConfirmation />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0ign3x0</bpmn:incoming>
       <bpmn:outgoing>Flow_0aw40yc</bpmn:outgoing>

@@ -7,7 +7,7 @@
   "properties": {
     "pushups": {
       "type": "boolean",
-      "title": "When the Great Chuck Norris does a pushup, he’s pushing the Earth down.",
+      "title": "When the  Chuck Norris does a pushup, he’s pushing the Earth down.",
       "oneOf": [
         {
           "title": "True",
