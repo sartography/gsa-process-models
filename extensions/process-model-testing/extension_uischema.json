@@ -1,0 +1,29 @@
+{
+  "version": "0.1",
+  "ux_elements": [
+    {
+      "page": "/new-bpmn-unit-test",
+      "label": "Tests",
+      "display_location": "header_menu_item"
+    }
+  ],
+  "pages": {
+    "/new-bpmn-unit-test": {
+      "components": [
+        {
+          "name": "CustomForm",
+          "arguments": {
+            "schema": "SPIFF_PROCESS_MODEL_FILE:FROM_JSON:::new-bpmn-unit-test-schema.json",
+            "uiSchema": "SPIFF_PROCESS_MODEL_FILE:FROM_JSON:::new-bpmn-unit-test-uischema.json"
+          },
+          "on_form_submit": {
+            "persistence_level": "none",
+            "api_path": "/process-model-tests/create/{modified_process_model_identifier}",
+            "is_full_api_path": true,
+            "set_extension_data_from_full_api_result": true
+          }
+        }
+      ]
+    }
+  }
+}

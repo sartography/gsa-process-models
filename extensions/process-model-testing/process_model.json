@@ -1,0 +1,9 @@
+{
+    "description": "",
+    "display_name": "Process Model Testing",
+    "exception_notification_addresses": [],
+    "fault_or_suspend_on_exception": "fault",
+    "metadata_extraction_paths": null,
+    "primary_file_name": "process-model-testing.bpmn",
+    "primary_process_id": "Process_process_model_testing_qu3y0gn"
+}

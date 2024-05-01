@@ -1,0 +1,19 @@
+{
+  "title": "Generate BPMN Unit Test",
+  "description": "Generate a BPMN unit test from a completed process instance.",
+  "type": "object",
+  "required": [
+    "modified_process_model_identifier",
+    "process_instance_id"
+  ],
+  "properties": {
+    "modified_process_model_identifier": {
+      "type": "string",
+      "title": "Modified Process Model Identifier"
+    },
+    "process_instance_id": {
+      "type": "number",
+      "title": "Process Instance ID"
+    }
+  }
+}
