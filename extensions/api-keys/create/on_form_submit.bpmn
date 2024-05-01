@@ -30,7 +30,8 @@ api_key = service_account.api_key
 del(ServiceAccountModel)
 del(ServiceAccountService)
 del(ApiError)
-del(g)</bpmn:script>
+del(g)
+del(service_account)</bpmn:script>
     </bpmn:scriptTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
